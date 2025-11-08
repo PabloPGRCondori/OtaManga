@@ -1,0 +1,6 @@
+@OtoMangaStore.Api_HostAddress = http://localhost:5105
+
+GET {{OtoMangaStore.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

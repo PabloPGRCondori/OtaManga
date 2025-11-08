@@ -1,0 +1,16 @@
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/bin/Debug/net9.0/OtoMangaStore.Application.deps.json
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/bin/Debug/net9.0/OtoMangaStore.Application.dll
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/bin/Debug/net9.0/OtoMangaStore.Application.pdb
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/bin/Debug/net9.0/OtoMangaStore.Domain.dll
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/bin/Debug/net9.0/OtoMangaStore.Domain.pdb
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.csproj.AssemblyReference.cache
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.AssemblyInfoInputs.cache
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.AssemblyInfo.cs
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.csproj.CoreCompileInputs.cache
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.sourcelink.json
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoManga.D84D7515.Up2Date
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.dll
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/refint/OtoMangaStore.Application.dll
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/OtoMangaStore.Application.pdb
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/Debug/net9.0/ref/OtoMangaStore.Application.dll

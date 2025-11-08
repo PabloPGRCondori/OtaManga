@@ -1,0 +1,12 @@
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/bin/Debug/net9.0/OtoMangaStore.Domain.deps.json
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/bin/Debug/net9.0/OtoMangaStore.Domain.dll
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/bin/Debug/net9.0/OtoMangaStore.Domain.pdb
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/OtoMangaStore.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/OtoMangaStore.Domain.AssemblyInfoInputs.cache
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/OtoMangaStore.Domain.AssemblyInfo.cs
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/OtoMangaStore.Domain.csproj.CoreCompileInputs.cache
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/OtoMangaStore.Domain.sourcelink.json
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/OtoMangaStore.Domain.dll
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/refint/OtoMangaStore.Domain.dll
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/OtoMangaStore.Domain.pdb
+/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/Debug/net9.0/ref/OtoMangaStore.Domain.dll
