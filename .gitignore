@@ -102,3 +102,6 @@ paket-files/
 
 # Sonar
 .sonarlint/
+
+# Environment-specific settings
+appsettings.Development.json

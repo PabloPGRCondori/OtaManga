@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Entities;
+using OtoMangaStore.Domain.Models;
 using OtoMangaStore.Infrastructure.Persistence;
 
 namespace OtoMangaStore.Infrastructure.Repositories
@@ -19,19 +19,15 @@ namespace OtoMangaStore.Infrastructure.Repositories
             return await _context.Mangas.ToListAsync();
         }
 
-        public async Task<Manga> GetByIdAsync(Guid id)
+        public async Task<Manga> GetByIdAsync(int id)
         {
             return await _context.Mangas.FindAsync(id);
         }
 
-        public async Task UpdateStockAsync(Guid mangaId, int quantity)
+        public async Task UpdateStockAsync(Manga entity)
         {
-            var manga = await _context.Mangas.FindAsync(mangaId);
-            if (manga != null)
-            {
-                manga.Stock -= quantity;
-                await _context.SaveChangesAsync();
-            }
+            _context.Mangas.Update(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }
