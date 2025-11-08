@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtoMangaStore.Domain", "OtoMangaStore.Domain\OtoMangaStore.Domain.csproj", "{A664B4A5-77FC-4A0E-AEEF-BC1009512BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtoMangaStore.Application", "OtoMangaStore.Application\OtoMangaStore.Application.csproj", "{719515BD-4389-4C04-BC1E-D31645BFC548}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtoMangaStore.Infrastructure", "OtoMangaStore.Infrastructure\OtoMangaStore.Infrastructure.csproj", "{193C48D0-3D0D-4F37-8C56-37B270ADA801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtoMangaStore.Api", "OtoMangaStore.Api\OtoMangaStore.Api.csproj", "{2D0424D0-F690-44BD-AAA6-6CEED5BC8757}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +18,23 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A664B4A5-77FC-4A0E-AEEF-BC1009512BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A664B4A5-77FC-4A0E-AEEF-BC1009512BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A664B4A5-77FC-4A0E-AEEF-BC1009512BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A664B4A5-77FC-4A0E-AEEF-BC1009512BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{719515BD-4389-4C04-BC1E-D31645BFC548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{719515BD-4389-4C04-BC1E-D31645BFC548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{719515BD-4389-4C04-BC1E-D31645BFC548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{719515BD-4389-4C04-BC1E-D31645BFC548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{193C48D0-3D0D-4F37-8C56-37B270ADA801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{193C48D0-3D0D-4F37-8C56-37B270ADA801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{193C48D0-3D0D-4F37-8C56-37B270ADA801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{193C48D0-3D0D-4F37-8C56-37B270ADA801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D0424D0-F690-44BD-AAA6-6CEED5BC8757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D0424D0-F690-44BD-AAA6-6CEED5BC8757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D0424D0-F690-44BD-AAA6-6CEED5BC8757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D0424D0-F690-44BD-AAA6-6CEED5BC8757}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
