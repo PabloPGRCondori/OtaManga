@@ -27,19 +27,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/ashleeprevate/.nuget/packages/": {}
+    "C:\\Users\\Maciel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
+      "projectUniqueName": "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj",
       "projectName": "OtoMangaStore.Application",
-      "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
-      "packagesPath": "/Users/ashleeprevate/.nuget/packages/",
-      "outputPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/obj/",
+      "projectPath": "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj",
+      "packagesPath": "C:\\Users\\Maciel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/ashleeprevate/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Maciel\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -51,8 +51,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
-              "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj"
+            "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {
+              "projectPath": "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj"
             }
           }
         }
@@ -88,7 +88,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
