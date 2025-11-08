@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\OtoMangaStore.Application\OtoMangaStore.Application.csproj" />
+      <ProjectReference Include="..\OtoMangaStore.Infrastructure\OtoMangaStore.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
