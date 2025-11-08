@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj": {}
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj": {}
   },
   "projects": {
-    "/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj": {
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
+        "projectUniqueName": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
         "projectName": "OtoMangaStore.Application",
-        "projectPath": "/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
-        "packagesPath": "/Users/admin/.nuget/packages/",
-        "outputPath": "/Users/admin/Desktop/OtaManga/OtoMangaStore.Application/obj/",
+        "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
+        "packagesPath": "/Users/ashleeprevate/.nuget/packages/",
+        "outputPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/admin/.nuget/NuGet/NuGet.Config"
+          "/Users/ashleeprevate/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -26,8 +26,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
-                "projectPath": "/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj"
+              "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
+                "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj"
               }
             }
           }
@@ -67,17 +67,17 @@
         }
       }
     },
-    "/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj",
+        "projectUniqueName": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj",
         "projectName": "OtoMangaStore.Domain",
-        "projectPath": "/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj",
-        "packagesPath": "/Users/admin/.nuget/packages/",
-        "outputPath": "/Users/admin/Desktop/OtaManga/OtoMangaStore.Domain/obj/",
+        "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj",
+        "packagesPath": "/Users/ashleeprevate/.nuget/packages/",
+        "outputPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/admin/.nuget/NuGet/NuGet.Config"
+          "/Users/ashleeprevate/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
