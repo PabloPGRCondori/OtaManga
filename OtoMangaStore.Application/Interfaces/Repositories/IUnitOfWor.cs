@@ -5,6 +5,9 @@ namespace OtoMangaStore.Application.Interfaces.Repositories;
 public interface IUnitOfWork
 {
     IMangaRepository Mangas { get; }
+    
+    IOrderRepository Orders { get; }
+    
 
     Task<int> SaveChangesAsync();
 }

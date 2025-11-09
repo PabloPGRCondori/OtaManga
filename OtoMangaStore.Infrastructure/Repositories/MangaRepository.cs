@@ -27,7 +27,7 @@ namespace OtoMangaStore.Infrastructure.Repositories
         public async Task UpdateStockAsync(Manga entity)
         {
             _context.Mangas.Update(entity);
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
         }
     }
 }
