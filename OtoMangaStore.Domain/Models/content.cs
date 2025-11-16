@@ -1,21 +1,27 @@
 using System.Collections.Generic;
+using System;
 
 namespace OtoMangaStore.Domain.Models
 {
-    // Mapea la tabla 'mangas'
-    public class Manga
+    public class content 
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Author { get; set; }
-        public decimal Price { get; set; }
-        public int Stock { get; set; } // Esencial para la lógica de negocio (OrderService)
+        
+        public int Stock { get; set; } 
         public string Synopsis { get; set; }
         public string ImageUrl { get; set; }
-        public string Category { get; set; }
         
-        // Propiedad de Navegación (para EF Core, no para el negocio puro)
-        public ICollection<OrderItem> OrderItems { get; set; }
+        // FK de Categoría
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+        
+        // FK de Autor
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
+        
+        // Propiedad de Navegación
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         
         // Regla de Negocio
         public void DecreaseStock(int quantity)

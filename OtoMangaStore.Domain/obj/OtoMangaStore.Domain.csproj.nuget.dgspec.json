@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {}
+    "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {
+    "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj",
         "projectName": "OtoMangaStore.Domain",
-        "projectPath": "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj",
-        "packagesPath": "C:\\Users\\Maciel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maciel\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\obj\\",
+        "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj",
+        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Maciel\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,11 +38,17 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -59,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

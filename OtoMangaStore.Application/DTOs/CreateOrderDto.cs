@@ -4,6 +4,8 @@ namespace OtoMangaStore.Application.DTOs
 {
     public class CreateOrderDto
     {
-        public List<CartItemDto> CartItems { get; set; }
+        public string UserId { get; set; } 
+        
+        public List<CartItemDto> Items { get; set; }
     }
 }

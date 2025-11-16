@@ -1,4 +1,3 @@
-// OtoMangaStore.Domain/Entities/Order.cs
 using System;
 using System.Collections.Generic;
 

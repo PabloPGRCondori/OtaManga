@@ -1,66 +1,16 @@
-﻿using OtoMangaStore.Application.DTOs;
-using OtoMangaStore.Application.Interfaces.Repositories;
+﻿using System.Threading.Tasks;
 
-namespace OtoMangaStore.Application.Interfaces.Services;
-
-public class OrderService : IOrderService
+namespace OtoMangaStore.Application.Interfaces.Repositories
 {
-    private readonly IUnitOfWork _unitOfWork;
-
-    public OrderService(IUnitOfWork unitOfWork)
+    // =======================================================================================
+    // TAREA - INTERFAZ DE PRECIOS
+    // 
+    // La implementación de esta interfaz (en la capa Infrastructure) debe consultar la
+    // tabla 'price_history' para encontrar el precio más reciente para el Manga/Content Item.
+    // =======================================================================================
+    public interface IPriceHistoryRepository
     {
-        _unitOfWork = unitOfWork;
-    }
-
-    public async Task<bool> CheckStockAsync(int mangaId, int quantity)
-    {
-        var manga = await _unitOfWork.Mangas.GetByIdAsync(mangaId);
-
-        if (manga is null)
-            return false;
-
-        return manga.Stock >= quantity;
-    }
-
-    public async Task<decimal> CalculateTotalAsync(CreateOrderDto orderDto)
-    {
-        if (orderDto.CartItems is null || !orderDto.CartItems.Any())
-            return 0;
-
-        decimal total = 0;
-
-        foreach (var item in orderDto.CartItems)
-        {
-            var manga = await _unitOfWork.Mangas.GetByIdAsync(item.MangaId);
-            if (manga is not null)
-            {
-                total += manga.Price * item.Quantity;
-            }
-        }
-
-        return total;
-    }
-
-    public async Task CreateOrderAsync(CreateOrderDto orderDto)
-    {
-        if (orderDto.CartItems is null || !orderDto.CartItems.Any())
-            return;
-
-        foreach (var item in orderDto.CartItems)
-        {
-            var manga = await _unitOfWork.Mangas.GetByIdAsync(item.MangaId);
-
-            if (manga is null)
-                continue;
-
-            if (manga.Stock < item.Quantity)
-                continue;
-
-            manga.Stock -= item.Quantity;
-            
-            await _unitOfWork.Mangas.UpdateStockAsync(manga);
-        }
-
-        await _unitOfWork.SaveChangesAsync();
+        Task<decimal> GetCurrentPriceAsync(int mangaId);
+        // Se puede añadir un método para registrar un nuevo precio si es necesario.
     }
 }
