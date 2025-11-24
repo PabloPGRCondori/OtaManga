@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using OtoMangaStore.Domain.Models;
 using OtoMangaStore.Api.Seed;
+using OtoMangaStore.Application.Interfaces.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -72,6 +73,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IMangaRepository, MangaRepository>();
 builder.Services.AddScoped<IPriceHistoryRepository, PriceHistoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OtoMangaStore.Application.Services.OrderService>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();
