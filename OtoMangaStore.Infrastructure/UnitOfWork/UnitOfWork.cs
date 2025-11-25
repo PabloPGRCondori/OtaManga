@@ -15,11 +15,13 @@ namespace OtoMangaStore.Infrastructure.UnitOfWork
             Mangas = new MangaRepository(_context);
             PriceHistory = new PriceHistoryRepository(_context);
             Orders = new OrderRepository(_context);
+            ClickMetrics = new ClickMetricsRepository(_context);
         }
 
         public IMangaRepository Mangas { get; }
         public IPriceHistoryRepository PriceHistory { get; }
         public IOrderRepository Orders { get; }
+        public IClickMetricsRepository ClickMetrics { get; }
 
         public Task<int> SaveChangesAsync()
         {
