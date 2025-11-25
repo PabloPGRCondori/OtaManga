@@ -19,14 +19,16 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-if (connectionString == null)
+if (string.IsNullOrWhiteSpace(connectionString))
 {
-    throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no fue encontrada.");
+    builder.Services.AddDbContext<OtoDbContext>(options =>
+        options.UseInMemoryDatabase("OtoMangaDev"));
 }
-
-builder.Services.AddDbContext<OtoDbContext>(options =>
-    options.UseNpgsql(connectionString)
-);
+else
+{
+    builder.Services.AddDbContext<OtoDbContext>(options =>
+        options.UseNpgsql(connectionString));
+}
 
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
 {
@@ -70,11 +72,16 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
+builder.Services.AddDataProtection();
+
 builder.Services.AddScoped<IMangaRepository, MangaRepository>();
 builder.Services.AddScoped<IPriceHistoryRepository, PriceHistoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OtoMangaStore.Application.Services.OrderService>();
+builder.Services.AddScoped<IClickMetricsRepository, ClickMetricsRepository>();
+builder.Services.AddScoped<IClickMetricsService, OtoMangaStore.Application.Services.ClickMetricsService>();
+builder.Services.AddScoped<IRecommendationService, OtoMangaStore.Application.Services.RecommendationService>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();
