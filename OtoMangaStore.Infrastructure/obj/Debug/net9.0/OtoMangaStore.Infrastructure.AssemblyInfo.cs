@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OtoMangaStore.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07e8a5582d25b97e69355267092556234ac1bd29")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94707a9dc75b03b5a12e2a7f8e0ee69fd2aaaf68")]
 [assembly: System.Reflection.AssemblyProductAttribute("OtoMangaStore.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OtoMangaStore.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
