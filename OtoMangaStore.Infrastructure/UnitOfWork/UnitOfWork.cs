@@ -20,7 +20,7 @@ namespace OtoMangaStore.Infrastructure.UnitOfWork
 
         public IMangaRepository Mangas { get; }
         public IPriceHistoryRepository PriceHistory { get; }
-        public IOrderRepository Orders { get; }
+        public IOrderRepository Orders { get; private set; }
         public IClickMetricsRepository ClickMetrics { get; }
 
         public Task<int> SaveChangesAsync()

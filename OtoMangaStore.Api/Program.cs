@@ -9,7 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using OtoMangaStore.Domain.Models;
 using OtoMangaStore.Api.Seed;
+
 using OtoMangaStore.Application.Interfaces.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
