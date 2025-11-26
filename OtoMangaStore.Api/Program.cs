@@ -13,6 +13,7 @@ using OtoMangaStore.Application.Interfaces.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -74,6 +75,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDataProtection();
 
+// Repositorios y unit of work
 builder.Services.AddScoped<IMangaRepository, MangaRepository>();
 builder.Services.AddScoped<IPriceHistoryRepository, PriceHistoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -82,9 +84,15 @@ builder.Services.AddScoped<IOrderService, OtoMangaStore.Application.Services.Ord
 builder.Services.AddScoped<IClickMetricsRepository, ClickMetricsRepository>();
 builder.Services.AddScoped<IClickMetricsService, OtoMangaStore.Application.Services.ClickMetricsService>();
 builder.Services.AddScoped<IRecommendationService, OtoMangaStore.Application.Services.RecommendationService>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+
 
 var app = builder.Build();
+
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseCors("AllowAll");
 
@@ -94,6 +102,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapRazorPages();
 app.UseAuthorization();
 app.MapControllers(); 
 

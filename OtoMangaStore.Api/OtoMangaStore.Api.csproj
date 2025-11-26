@@ -12,6 +12,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.11" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
@@ -24,6 +25,12 @@
     <ProjectReference Include="..\OtoMangaStore.Application\OtoMangaStore.Application.csproj" />
     <ProjectReference Include="..\OtoMangaStore.Domain\OtoMangaStore.Domain.csproj" />
     <ProjectReference Include="..\OtoMangaStore.Infrastructure\OtoMangaStore.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Areas\Admin\Pages\Dashboard\Index.cshtml.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

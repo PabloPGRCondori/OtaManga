@@ -16,12 +16,18 @@ namespace OtoMangaStore.Infrastructure.UnitOfWork
             PriceHistory = new PriceHistoryRepository(_context);
             Orders = new OrderRepository(_context);
             ClickMetrics = new ClickMetricsRepository(_context);
+
+            Authors = new AuthorRepository(_context);
+            Categories = new CategoryRepository(_context);
         }
 
         public IMangaRepository Mangas { get; }
         public IPriceHistoryRepository PriceHistory { get; }
         public IOrderRepository Orders { get; }
         public IClickMetricsRepository ClickMetrics { get; }
+
+        public IAuthorRepository Authors { get; }
+        public ICategoryRepository Categories { get; }
 
         public Task<int> SaveChangesAsync()
         {

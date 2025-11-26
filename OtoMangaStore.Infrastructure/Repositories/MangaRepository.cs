@@ -27,6 +27,15 @@ namespace OtoMangaStore.Infrastructure.Repositories
 
         public async Task<IEnumerable<content>> GetMangaByCategoryAsync(int categoryId)
         {
+            if (categoryId <= 0)
+            {
+                // devolver todo si categoryId <= 0
+                return await _context.Mangas
+                    .Include(m => m.Category)
+                    .Include(m => m.Author)
+                    .ToListAsync();
+            }
+
             return await _context.Mangas
                 .Where(m => m.CategoryId == categoryId)
                 .Include(m => m.Category)
@@ -43,6 +52,26 @@ namespace OtoMangaStore.Infrastructure.Repositories
         public async Task<content> GetByIdAsync(int mangaId)
         {
             return await _context.Mangas.FindAsync(mangaId);
+        }
+
+        // Nuevos métodos
+        public async Task AddAsync(content manga)
+        {
+            await _context.Mangas.AddAsync(manga);
+        }
+
+        public async Task<IEnumerable<content>> GetAllAsync()
+        {
+            return await _context.Mangas
+                .Include(m => m.Category)
+                .Include(m => m.Author)
+                .ToListAsync();
+        }
+
+        public Task DeleteAsync(content manga)
+        {
+            _context.Mangas.Remove(manga);
+            return Task.CompletedTask;
         }
     }
 }
