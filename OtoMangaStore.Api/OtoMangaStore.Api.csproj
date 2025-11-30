@@ -33,4 +33,11 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Mangas\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Mangas\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Mangas\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Mangas\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

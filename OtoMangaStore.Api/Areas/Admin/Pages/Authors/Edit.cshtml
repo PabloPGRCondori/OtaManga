@@ -1,0 +1,22 @@
+﻿@page
+@model OtoMangaStore.Api.Areas.Admin.Pages.Authors.EditModel
+
+<h2>Edit Author</h2>
+
+<form method="post" class="card p-3">
+    <input type="hidden" asp-for="Author.Id" />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Author.Name" class="form-control" required />
+        <span asp-validation-for="Author.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="Author.Description" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

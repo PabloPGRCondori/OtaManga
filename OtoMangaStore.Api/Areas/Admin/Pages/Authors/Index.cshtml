@@ -1,0 +1,30 @@
+﻿@page
+@model OtoMangaStore.Api.Areas.Admin.Pages.Authors.IndexModel
+
+<h2>Autores</h2>
+
+<a asp-page="Create" class="btn btn-success mb-3">Crear Autor</a>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var a in Model.Authors)
+    {
+        <tr>
+            <td>@a.Name</td>
+            <td>@a.Description</td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@a.Id" class="btn btn-warning btn-sm">Editar</a>
+                <a asp-page="Delete" asp-route-id="@a.Id" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

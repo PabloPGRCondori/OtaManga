@@ -1,0 +1,20 @@
+﻿@page
+@model OtoMangaStore.Api.Areas.Admin.Pages.Authors.CreateModel
+
+<h2>Crear Autor</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input asp-for="Author.Name" class="form-control" />
+        <span asp-validation-for="Author.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Descripción</label>
+        <textarea asp-for="Author.Description" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-primary">Guardar</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+</form>

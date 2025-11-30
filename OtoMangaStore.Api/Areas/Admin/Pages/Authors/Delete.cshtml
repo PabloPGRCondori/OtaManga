@@ -1,0 +1,18 @@
+﻿@page
+@model OtoMangaStore.Api.Areas.Admin.Pages.Authors.DeleteModel
+
+<h2>Delete Author</h2>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete this author?
+</div>
+
+<div class="card p-3">
+    <p><strong>Name:</strong> @Model.Author.Name</p>
+    <p><strong>Description:</strong> @Model.Author.Description</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

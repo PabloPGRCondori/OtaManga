@@ -8,7 +8,7 @@ namespace OtoMangaStore.Domain.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        // [CORREGIDO] Usar la clase 'Manga'
-        public ICollection<content> Mangas { get; set; } = new List<content>();
+        // Relación correcta
+        public ICollection<Manga> Mangas { get; set; } = new List<Manga>();
     }
 }
