@@ -1,0 +1,28 @@
+﻿@page
+@model OtoMangaStore.Api.Areas.Admin.Pages.Categories.IndexModel
+
+<h2>Categorías</h2>
+<a class="btn btn-primary" asp-page="Create">Nueva Categoría</a>
+
+<table class="table mt-3">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var c in Model.Categories)
+    {
+        <tr>
+            <td>@c.Name</td>
+            <td>@c.Description</td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@c.Id" class="btn btn-warning btn-sm">Editar</a>
+                <a asp-page="Delete" asp-route-id="@c.Id" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

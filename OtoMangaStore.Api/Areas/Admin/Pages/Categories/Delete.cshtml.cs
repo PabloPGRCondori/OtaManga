@@ -1,0 +1,43 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using OtoMangaStore.Application.Interfaces.Repositories;
+using OtoMangaStore.Domain.Models;
+
+namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
+{
+    public class DeleteModel : PageModel
+    {
+        private readonly IUnitOfWork _uow;
+
+        public DeleteModel(IUnitOfWork uow)
+        {
+            _uow = uow;
+        }
+
+        public Category Category { get; set; }
+
+        public async Task<IActionResult> OnGet(int id)
+        {
+            Category = await _uow.Categories.GetByIdAsync(id);
+
+            if (Category == null)
+                return RedirectToPage("Index");
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPost(int id)
+        {
+            var category = await _uow.Categories.GetByIdAsync(id);
+
+            if (category != null)
+            {
+                await _uow.Categories.DeleteAsync(category);
+                await _uow.SaveChangesAsync();
+            }
+
+            return RedirectToPage("Index");
+        }
+
+    }
+}
