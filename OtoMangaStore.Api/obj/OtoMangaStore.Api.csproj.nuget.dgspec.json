@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Api\\OtoMangaStore.Api.csproj": {}
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Api/OtoMangaStore.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Api\\OtoMangaStore.Api.csproj": {
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Api/OtoMangaStore.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Api\\OtoMangaStore.Api.csproj",
+        "projectUniqueName": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Api/OtoMangaStore.Api.csproj",
         "projectName": "OtoMangaStore.Api",
-        "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Api\\OtoMangaStore.Api.csproj",
-        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Api\\obj\\",
+        "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Api/OtoMangaStore.Api.csproj",
+        "packagesPath": "/Users/ashleeprevate/.nuget/packages/",
+        "outputPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/ashleeprevate/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -26,14 +26,14 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj": {
-                "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj"
+              "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj": {
+                "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj"
               },
-              "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {
-                "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj"
+              "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
+                "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj"
               },
-              "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Infrastructure\\OtoMangaStore.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Infrastructure\\OtoMangaStore.Infrastructure.csproj"
+              "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Infrastructure/OtoMangaStore.Infrastructure.csproj": {
+                "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Infrastructure/OtoMangaStore.Infrastructure.csproj"
               }
             }
           }
@@ -54,13 +54,39 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[9.0.8, )"
+              "version": "[9.0.11, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[9.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.11, )"
+            },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[2.3.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
@@ -90,21 +116,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\pablo\\.dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj": {
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj",
+        "projectUniqueName": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
         "projectName": "OtoMangaStore.Application",
-        "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj",
-        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\obj\\",
+        "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj",
+        "packagesPath": "/Users/ashleeprevate/.nuget/packages/",
+        "outputPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/ashleeprevate/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -116,8 +142,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {
-                "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj"
+              "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
+                "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj"
               }
             }
           }
@@ -137,6 +163,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -153,21 +185,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\pablo\\.dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj",
+        "projectUniqueName": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj",
         "projectName": "OtoMangaStore.Domain",
-        "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj",
-        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\obj\\",
+        "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj",
+        "packagesPath": "/Users/ashleeprevate/.nuget/packages/",
+        "outputPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/ashleeprevate/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -218,21 +250,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\pablo\\.dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Infrastructure\\OtoMangaStore.Infrastructure.csproj": {
+    "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Infrastructure/OtoMangaStore.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Infrastructure\\OtoMangaStore.Infrastructure.csproj",
+        "projectUniqueName": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Infrastructure/OtoMangaStore.Infrastructure.csproj",
         "projectName": "OtoMangaStore.Infrastructure",
-        "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Infrastructure\\OtoMangaStore.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Infrastructure\\obj\\",
+        "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Infrastructure/OtoMangaStore.Infrastructure.csproj",
+        "packagesPath": "/Users/ashleeprevate/.nuget/packages/",
+        "outputPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/ashleeprevate/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -244,11 +276,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj": {
-                "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Application\\OtoMangaStore.Application.csproj"
+              "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj": {
+                "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Application/OtoMangaStore.Application.csproj"
               },
-              "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj": {
-                "projectPath": "C:\\Users\\pablo\\RiderProjects\\OtaManga\\OtoMangaStore.Domain\\OtoMangaStore.Domain.csproj"
+              "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj": {
+                "projectPath": "/Users/ashleeprevate/RiderProjects/OtaManga/OtoMangaStore.Domain/OtoMangaStore.Domain.csproj"
               }
             }
           }
@@ -272,6 +304,10 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -300,7 +336,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\pablo\\.dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
