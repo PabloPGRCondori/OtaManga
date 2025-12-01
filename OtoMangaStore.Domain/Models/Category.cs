@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OtoMangaStore.Domain.Models
 {
@@ -10,8 +11,9 @@ namespace OtoMangaStore.Domain.Models
         [StringLength(80, ErrorMessage = "El nombre no debe superar los 80 caracteres.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "La descripción es obligatoria.")]
         [StringLength(200, ErrorMessage = "La descripción no debe superar los 200 caracteres.")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
+
     }
+
 }
