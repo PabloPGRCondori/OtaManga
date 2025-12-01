@@ -1,21 +1,28 @@
-/.vs/
-/.idea/
-**/bin/
-**/obj/
-**/out/
-**/TestResults/
-*.user
+# Ignore Visual Studio / Rider / .NET build files
+*.rsuser
 *.suo
-*.swp
-*.log
-Thumbs.db
-.DS_Store
-.env
-.env.*
-*.pfx
-*.pem
-*.key
-*.cer
-*.crt
-/OtoMangaStore.Api/appsettings.json
-/OtoMangaStore.Api/appsettings.*.json
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Rider
+.idea/
+
+# VSCode
+.vscode/
+
+# NuGet
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Others
+*.cache

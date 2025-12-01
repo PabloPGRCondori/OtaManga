@@ -1,0 +1,42 @@
+﻿@page
+@model OtoMangaStore.Api.Areas.Admin.Pages.Mangas.IndexModel
+@{
+    ViewData["Title"] = "Mangas";
+}
+
+<h1>Mangas</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Crear Manga</a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Título</th>
+        <th>Categoría</th>
+        <th>Autor</th>
+        <th>Stock</th>
+        <th>Precio actual</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach(var m in Model.Items)
+    {
+        <tr>
+            <td>@m.Id</td>
+            <td>@m.Title</td>
+            <td>@m.Category?.Name</td>
+            <td>@m.Author?.Name</td>
+            <td>@m.Stock</td>
+            <td>@Model.Prices.TryGetValue(m.Id, out var p) ? p.ToString("C") : "-"</td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@m.Id" class="btn btn-sm btn-secondary">Editar</a>
+                <a asp-page="Delete" asp-route-id="@m.Id" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

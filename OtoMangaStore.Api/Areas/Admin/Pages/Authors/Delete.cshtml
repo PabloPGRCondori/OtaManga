@@ -1,0 +1,18 @@
+﻿@page
+@model OtoMangaStore.Api.Areas.Admin.Pages.Authors.DeleteModel
+
+<h2>Eliminar Autor</h2>
+
+<div class="alert alert-danger">
+    ¿Estás seguro de que deseas eliminar este autor?
+</div>
+
+<div class="card p-3 shadow-sm mb-3">
+    <p><strong>Nombre:</strong> @Model.Author.Name</p>
+    <p><strong>Descripción:</strong> @Model.Author.Description</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+</form>
