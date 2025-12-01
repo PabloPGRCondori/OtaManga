@@ -10,13 +10,13 @@ namespace OtoMangaStore.Infrastructure.Persistence
             : base(options) 
         {
         }
-        public DbSet<Content> Mangas { get; set; } 
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Author> Authors { get; set; }
-        public DbSet<PriceHistory> PriceHistories { get; set; }
-        public DbSet<ClickMetric> ClickMetrics { get; set; }   
+        public DbSet<Content> Mangas { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
+        public DbSet<OrderItem> OrderItems { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Author> Authors { get; set; } = null!;
+        public DbSet<PriceHistory> PriceHistories { get; set; } = null!;
+        public DbSet<ClickMetric> ClickMetrics { get; set; } = null!;  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

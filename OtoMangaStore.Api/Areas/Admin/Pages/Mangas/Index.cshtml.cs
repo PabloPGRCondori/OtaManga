@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,7 +11,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
     {
         private readonly IUnitOfWork _uow;
 
-        public List<content> Items { get; set; } = new();
+        public List<Content> Items { get; set; } = new();
         public Dictionary<int, decimal> Prices { get; set; } = new();
 
         public IndexModel(IUnitOfWork uow)

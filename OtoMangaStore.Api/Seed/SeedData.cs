@@ -69,7 +69,7 @@ namespace OtoMangaStore.Api.Seed
             var mangaCategory = db.Categories.First(c => c.Name == "Manga");
             if (!db.Mangas.Any())
             {
-                var item = new content
+                var item = new Content
                 {
                     Title = "Manga Demo",
                     Stock = 100,

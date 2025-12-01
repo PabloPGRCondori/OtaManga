@@ -48,7 +48,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 return Page();
             }
 
-            var item = new content
+            var item = new Content
             {
                 Title = Input.Title,
                 Stock = Input.Stock,
