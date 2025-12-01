@@ -8,5 +8,6 @@ namespace OtoMangaStore.Application.Interfaces.Repositories
     {
         Task AddAsync(Order order);
         Task<IEnumerable<Order>> GetByUserIdAsync(string userId);
+        Task<IEnumerable<Order>> GetAllAsync();
     }
 }

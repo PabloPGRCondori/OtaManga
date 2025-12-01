@@ -29,5 +29,12 @@ namespace OtoMangaStore.Infrastructure.Repositories
                 .Include(o => o.OrderItems)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Order>> GetAllAsync()
+        {
+            return await _context.Orders
+                .Include(o => o.OrderItems)
+                .OrderByDescending(o => o.OrderDate) 
+                .ToListAsync();
+        }
     }
 }
