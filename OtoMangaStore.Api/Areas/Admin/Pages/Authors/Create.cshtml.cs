@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OtoMangaStore.Application.Interfaces.Repositories;
 using OtoMangaStore.Domain.Models;
@@ -16,7 +16,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
         }
 
         [BindProperty]
-        public Author Author { get; set; }
+        public Author Author { get; set; } = new Author();
 
         public void OnGet() { }
 

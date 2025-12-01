@@ -9,8 +9,8 @@ namespace OtoMangaStore.Domain.Models
         public decimal UnitPrice { get; set; }
 
         // Navegación
-        public Order Order { get; set; }
+        public Order Order { get; set; } = null!;
         // [CORREGIDO] Usar la clase 'Manga'
-        public content Content { get; set; } 
+        public Content Content { get; set; } = null!; 
     }
 }

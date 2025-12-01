@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace OtoMangaStore.Domain.Models
 {
@@ -9,10 +9,10 @@ namespace OtoMangaStore.Domain.Models
         public int MangaId { get; set; } // FK
 
         // [CORREGIDO] Usar la clase 'Manga'
-        public content Content { get; set; }
+        public Content Content { get; set; } = null!;
 
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public ApplicationUser User { get; set; } = null!;
 
         public DateTime ClickDate { get; set; }
     }

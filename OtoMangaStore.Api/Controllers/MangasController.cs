@@ -39,9 +39,9 @@ namespace OtoMangaStore.Api.Controllers
                 Synopsis = m.Synopsis,
                 ImageUrl = m.ImageUrl,
                 CategoryId = m.CategoryId,
-                CategoryName = m.Category?.Name,
+                CategoryName = m.Category?.Name ?? string.Empty,
                 AuthorId = m.AuthorId,
-                AuthorName = m.Author?.Name,
+                AuthorName = m.Author?.Name ?? string.Empty,
                 CurrentPrice = prices[idx]
             });
 
@@ -66,9 +66,9 @@ namespace OtoMangaStore.Api.Controllers
                 Synopsis = m.Synopsis,
                 ImageUrl = m.ImageUrl,
                 CategoryId = m.CategoryId,
-                CategoryName = m.Category?.Name,
+                CategoryName = m.Category?.Name ?? string.Empty,
                 AuthorId = m.AuthorId,
-                AuthorName = m.Author?.Name,
+                AuthorName = m.Author?.Name ?? string.Empty,
                 CurrentPrice = price
             };
             return Ok(dto);

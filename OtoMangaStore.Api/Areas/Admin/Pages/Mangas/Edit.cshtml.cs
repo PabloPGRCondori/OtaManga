@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,13 +25,13 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
         }
 
         [BindProperty]
-        public ContentEditModel Input { get; set; }
+        public ContentEditModel Input { get; set; } = new ContentEditModel();
 
         [BindProperty]
-        public IFormFile UploadImage { get; set; }
+        public IFormFile UploadImage { get; set; } = null!;
 
-        public IEnumerable<SelectListItem> AuthorsSelect { get; set; }
-        public IEnumerable<SelectListItem> CategoriesSelect { get; set; }
+        public IEnumerable<SelectListItem> AuthorsSelect { get; set; } = Enumerable.Empty<SelectListItem>();
+        public IEnumerable<SelectListItem> CategoriesSelect { get; set; } = Enumerable.Empty<SelectListItem>();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {

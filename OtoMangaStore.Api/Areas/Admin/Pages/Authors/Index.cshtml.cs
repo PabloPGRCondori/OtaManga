@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using OtoMangaStore.Application.Interfaces.Repositories;
 using OtoMangaStore.Domain.Models;
 
@@ -13,7 +13,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
             _uow = uow;
         }
 
-        public IEnumerable<Author> Authors { get; set; }
+        public IEnumerable<Author> Authors { get; set; } = Enumerable.Empty<Author>();
 
         public async Task OnGetAsync()
         {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OtoMangaStore.Application.Interfaces.Repositories;
@@ -23,7 +23,7 @@ namespace OtoMangaStore.Infrastructure.Repositories
         public async Task<IEnumerable<Author>> GetAllAsync() =>
             await _db.Authors.AsNoTracking().ToListAsync();
 
-        public async Task<Author> GetByIdAsync(int id) =>
+        public async Task<Author?> GetByIdAsync(int id) =>
             await _db.Authors.FindAsync(id);
 
         public Task UpdateAsync(Author author)

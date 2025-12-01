@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OtoMangaStore.Application.Interfaces.Repositories;
 using OtoMangaStore.Domain.Models;
@@ -17,7 +17,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 
         // Usamos "content" porque ese es TU modelo real
         [BindProperty]
-        public content Manga { get; set; }
+        public Content Manga { get; set; } = new Content();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {

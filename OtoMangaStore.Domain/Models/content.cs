@@ -3,7 +3,7 @@ using System;
 
 namespace OtoMangaStore.Domain.Models
 {
-    public class content 
+    public class Content
     {
         public int Id { get; set; }
         public string Title { get; set; }

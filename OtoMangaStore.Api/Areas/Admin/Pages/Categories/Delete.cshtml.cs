@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OtoMangaStore.Application.Interfaces.Repositories;
 using OtoMangaStore.Domain.Models;
@@ -14,7 +14,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
             _uow = uow;
         }
 
-        public Category Category { get; set; }
+        public Category Category { get; set; } = new Category();
 
         public async Task<IActionResult> OnGet(int id)
         {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OtoMangaStore.Application.Interfaces.Repositories;
@@ -23,7 +23,7 @@ namespace OtoMangaStore.Infrastructure.Repositories
         public async Task<IEnumerable<Category>> GetAllAsync() =>
             await _db.Categories.AsNoTracking().ToListAsync();
 
-        public async Task<Category> GetByIdAsync(int id) =>
+        public async Task<Category?> GetByIdAsync(int id) =>
             await _db.Categories.FindAsync(id);
 
         public Task UpdateAsync(Category category)

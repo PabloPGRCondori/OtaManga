@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using OtoMangaStore.Domain.Models;
 
@@ -10,7 +10,7 @@ namespace OtoMangaStore.Infrastructure.Persistence
             : base(options) 
         {
         }
-        public DbSet<content> Mangas { get; set; } 
+        public DbSet<Content> Mangas { get; set; } 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -21,7 +21,7 @@ namespace OtoMangaStore.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); 
-            modelBuilder.Entity<content>().ToTable("content"); 
+            modelBuilder.Entity<Content>().ToTable("content"); 
             
             modelBuilder.Entity<Order>().ToTable("orders");
             modelBuilder.Entity<OrderItem>().ToTable("orderitems");

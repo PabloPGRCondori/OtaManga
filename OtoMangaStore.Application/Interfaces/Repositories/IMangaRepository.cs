@@ -6,14 +6,14 @@ namespace OtoMangaStore.Application.Interfaces.Repositories
 {
     public interface IMangaRepository 
     {
-        Task<content> GetMangaDetailsAsync(int mangaId);
-        Task<IEnumerable<content>> GetMangaByCategoryAsync(int categoryId);
-        Task UpdateAsync(content manga);
-        Task<content> GetByIdAsync(int mangaId);
+        Task<Content?> GetMangaDetailsAsync(int mangaId);
+        Task<IEnumerable<Content>> GetMangaByCategoryAsync(int categoryId);
+        Task UpdateAsync(Content manga);
+        Task<Content?> GetByIdAsync(int mangaId);
 
         // Nuevos para el CRUD
-        Task AddAsync(content manga);
-        Task<IEnumerable<content>> GetAllAsync();
-        Task DeleteAsync(content manga);
+        Task AddAsync(Content manga);
+        Task<IEnumerable<Content>> GetAllAsync();
+        Task DeleteAsync(Content manga);
     }
 }

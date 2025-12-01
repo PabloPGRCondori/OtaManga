@@ -8,5 +8,7 @@ public interface IUnitOfWork
     IPriceHistoryRepository PriceHistory { get; }
     IOrderRepository Orders { get; }  // Agregar esta propiedad
     IClickMetricsRepository ClickMetrics { get; }  // Agregar esta propiedad
+    IAuthorRepository Authors { get; }
+    ICategoryRepository Categories { get; }
     Task<int> SaveChangesAsync();
 }
