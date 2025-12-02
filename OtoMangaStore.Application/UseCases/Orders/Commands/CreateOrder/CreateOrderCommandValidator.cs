@@ -6,7 +6,7 @@ namespace OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder
     {
         public CreateOrderCommandValidator()
         {
-            RuleFor(x => x.ExternalUserId)
+            RuleFor(x => x.UserId)
                 .NotEmpty().WithMessage("El ID de usuario es obligatorio.");
 
             RuleFor(x => x.Items)

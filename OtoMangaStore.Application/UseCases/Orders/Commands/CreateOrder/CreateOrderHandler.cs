@@ -20,7 +20,7 @@ namespace OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder
         {
             var order = new Order
             {
-                ExternalUserId = request.ExternalUserId,
+                ExternalUserId = request.UserId,
                 OrderDate = DateTime.UtcNow,
                 Status = "Created",
                 TotalAmount = 0m,

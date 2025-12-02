@@ -21,18 +21,8 @@ namespace OtoMangaStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] OtoMangaStore.Api.DTOs.Requests.CreateOrderRequest request)
+        public async Task<ActionResult<int>> Create([FromBody] CreateOrderCommand command)
         {
-            var command = new CreateOrderCommand
-            {
-                ExternalUserId = request.UserId,
-                Items = request.Items.Select(i => new OrderItemCommand
-                {
-                    MangaId = i.MangaId,
-                    Quantity = i.Quantity
-                }).ToList()
-            };
-
             var id = await _mediator.Send(command);
             return Ok(id);
         }

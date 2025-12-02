@@ -31,35 +31,18 @@ namespace OtoMangaStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] OtoMangaStore.Api.DTOs.Requests.CreateCategoryRequest request)
+        public async Task<IActionResult> Create([FromBody] OtoMangaStore.Application.UseCases.Categories.Commands.CreateCategory.CreateCategoryCommand command)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var command = new OtoMangaStore.Application.UseCases.Categories.Commands.CreateCategory.CreateCategoryCommand
-            {
-                Name = request.Name
-            };
-
             var id = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = id }, new { id = id, name = request.Name });
+            return CreatedAtAction(nameof(GetById), new { id = id }, new { id = id, name = command.Name });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] OtoMangaStore.Api.DTOs.Requests.UpdateCategoryRequest request)
+        public async Task<IActionResult> Update(int id, [FromBody] OtoMangaStore.Application.UseCases.Categories.Commands.UpdateCategory.UpdateCategoryCommand command)
         {
-            if (id != request.Id)
+            if (id != command.Id)
                 return BadRequest("El ID no coincide.");
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var command = new OtoMangaStore.Application.UseCases.Categories.Commands.UpdateCategory.UpdateCategoryCommand
-            {
-                Id = request.Id,
-                Name = request.Name
-            };
 
             await _mediator.Send(command);
 
