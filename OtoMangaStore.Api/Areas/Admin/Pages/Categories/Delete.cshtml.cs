@@ -18,11 +18,12 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
 
         public async Task<IActionResult> OnGet(int id)
         {
-            Category = await _uow.Categories.GetByIdAsync(id);
+            var c = await _uow.Categories.GetByIdAsync(id);
 
-            if (Category == null)
+            if (c == null)
                 return RedirectToPage("Index");
 
+            Category = c;
             return Page();
         }
 
