@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddRazorPages(); // ✅ Habilitar Razor Pages
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -201,6 +202,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers(); 
+app.MapRazorPages(); // ✅ Habilitar rutas de Razor Pages
 
 using (var scope = app.Services.CreateScope())
 {

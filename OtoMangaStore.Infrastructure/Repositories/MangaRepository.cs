@@ -17,7 +17,7 @@ namespace OtoMangaStore.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<content?> GetMangaDetailsAsync(int mangaId)
+        public async Task<Content?> GetMangaDetailsAsync(int mangaId)
         {
             return await _context.Mangas
                 .Include(m => m.Category)
