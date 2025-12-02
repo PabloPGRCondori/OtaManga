@@ -30,6 +30,7 @@ namespace OtoMangaStore.Application.UseCases.Mangas.Commands.UpdateManga
             manga.ImageUrl = request.CoverImageUrl;
             manga.CategoryId = request.CategoryId;
             manga.AuthorId = request.AuthorId;
+            manga.Price = request.Price;
 
             await _uow.Mangas.UpdateAsync(manga);
             await _uow.SaveChangesAsync();

@@ -23,7 +23,8 @@ namespace OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga
                 Synopsis = request.Description,
                 ImageUrl = request.CoverImageUrl,
                 CategoryId = request.CategoryId,
-                AuthorId = request.AuthorId
+                AuthorId = request.AuthorId,
+                Price = request.Price
             };
 
             await _uow.Mangas.AddAsync(manga);
@@ -38,7 +39,7 @@ namespace OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga
                 ImageUrl = manga.ImageUrl,
                 CategoryId = manga.CategoryId,
                 AuthorId = manga.AuthorId,
-                CurrentPrice = 0
+                CurrentPrice = manga.Price
             };
         }
     }

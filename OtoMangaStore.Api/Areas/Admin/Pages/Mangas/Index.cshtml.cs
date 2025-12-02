@@ -23,12 +23,6 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
         {
             var items = (await _uow.Mangas.GetAllAsync()).ToList();
             Items = items;
-            var pricesTasks = items.Select(m => _uow.PriceHistory.GetCurrentPriceAsync(m.Id)).ToArray();
-            var prices = await Task.WhenAll(pricesTasks);
-            for (int i = 0; i < items.Count; i++)
-            {
-                Prices[items[i].Id] = prices[i];
-            }
         }
     }
 }

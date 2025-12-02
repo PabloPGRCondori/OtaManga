@@ -34,7 +34,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
         public ContentEditModel Input { get; set; } = new ContentEditModel();
 
         [BindProperty]
-        public IFormFile UploadImage { get; set; } = null!;
+        public IFormFile? UploadImage { get; set; }
 
         public IEnumerable<SelectListItem> AuthorsSelect { get; set; } = Enumerable.Empty<SelectListItem>();
         public IEnumerable<SelectListItem> CategoriesSelect { get; set; } = Enumerable.Empty<SelectListItem>();
@@ -61,7 +61,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 CategoryId = Input.CategoryId,
                 AuthorId = Input.AuthorId,
                 CoverImageUrl = Input.ImageUrl,
-                Price = 0 // Default price, can be updated later
+                Price = Input.Price
             };
 
             // Upload image optional

@@ -34,7 +34,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
         public ContentEditModel Input { get; set; } = new ContentEditModel();
 
         [BindProperty]
-        public IFormFile UploadImage { get; set; } = null!;
+        public IFormFile? UploadImage { get; set; }
 
         public IEnumerable<SelectListItem> AuthorsSelect { get; set; } = Enumerable.Empty<SelectListItem>();
         public IEnumerable<SelectListItem> CategoriesSelect { get; set; } = Enumerable.Empty<SelectListItem>();
@@ -52,7 +52,8 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 Synopsis = item.Synopsis,
                 ImageUrl = item.ImageUrl,
                 CategoryId = item.CategoryId,
-                AuthorId = item.AuthorId
+                AuthorId = item.AuthorId,
+                Price = 0m
             };
 
             AuthorsSelect = (await _uow.Authors.GetAllAsync()).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
@@ -79,7 +80,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 CategoryId = Input.CategoryId,
                 AuthorId = Input.AuthorId,
                 CoverImageUrl = Input.ImageUrl,
-                Price = 0 // Default price, can be updated later
+                Price = Input.Price
             };
 
             if (UploadImage != null && UploadImage.Length > 0)

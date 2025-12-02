@@ -24,5 +24,8 @@ namespace OtoMangaStore.Api.Areas.Admin.Models
 
         [Required]
         public int AuthorId { get; set; }
+
+        [Range(typeof(decimal), "0", "79228162514264337593543950335")]
+        public decimal Price { get; set; }
     }
 }

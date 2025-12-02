@@ -20,16 +20,22 @@
         <span asp-validation-for="Input.Title" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Input.Stock"></label>
-        <input asp-for="Input.Stock" class="form-control" required />
-        <span asp-validation-for="Input.Stock" class="text-danger"></span>
-    </div>
+<div class="form-group">
+    <label asp-for="Input.Stock"></label>
+    <input asp-for="Input.Stock" class="form-control" required />
+    <span asp-validation-for="Input.Stock" class="text-danger"></span>
+</div>
 
-    <div class="form-group">
-        <label asp-for="Input.Synopsis"></label>
-        <textarea asp-for="Input.Synopsis" class="form-control"></textarea>
-        <span asp-validation-for="Input.Synopsis" class="text-danger"></span>
+<div class="form-group">
+    <label asp-for="Input.Synopsis"></label>
+    <textarea asp-for="Input.Synopsis" class="form-control"></textarea>
+    <span asp-validation-for="Input.Synopsis" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Input.Price"></label>
+    <input asp-for="Input.Price" class="form-control" type="number" step="0.01" min="0" />
+    <span asp-validation-for="Input.Price" class="text-danger"></span>
     </div>
 
     <div class="form-group">

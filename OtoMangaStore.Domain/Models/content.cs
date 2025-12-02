@@ -11,6 +11,7 @@ namespace OtoMangaStore.Domain.Models
         public int Stock { get; set; } 
         public string Synopsis { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;
+        public decimal Price { get; set; }
         
         // FK de Categoría
         public int CategoryId { get; set; }
