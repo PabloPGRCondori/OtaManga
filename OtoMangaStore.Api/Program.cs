@@ -178,6 +178,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddDataProtection();
 
 // Repositorios y Servicios
+builder.Services.AddMemoryCache();
 builder.Services.AddScoped<IMangaRepository, MangaRepository>();
 builder.Services.AddScoped<IPriceHistoryRepository, PriceHistoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

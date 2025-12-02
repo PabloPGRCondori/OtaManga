@@ -40,5 +40,20 @@ namespace OtoMangaStore.Infrastructure.Repositories
                 .OrderByDescending(ph => ph.EffectiveDate) // Ordenado por fecha
                 .ToListAsync();
         }
+
+        public async Task<Dictionary<int, decimal>> GetCurrentPricesForMangasAsync(IEnumerable<int> mangaIds)
+        {
+            var prices = await _context.PriceHistories
+                .Where(ph => mangaIds.Contains(ph.MangaId))
+                .GroupBy(ph => ph.MangaId)
+                .Select(g => new 
+                { 
+                    MangaId = g.Key, 
+                    Price = g.OrderByDescending(ph => ph.EffectiveDate).Select(ph => ph.Price).FirstOrDefault() 
+                })
+                .ToDictionaryAsync(x => x.MangaId, x => x.Price);
+
+            return prices;
+        }
     }
 }

@@ -24,7 +24,5 @@ namespace OtoMangaStore.Api.Areas.Admin.Models
 
         [Required]
         public int AuthorId { get; set; }
-
-        public bool IsActive { get; set; }
     }
 }

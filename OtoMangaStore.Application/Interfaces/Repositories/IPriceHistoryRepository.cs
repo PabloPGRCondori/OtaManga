@@ -9,5 +9,6 @@ namespace OtoMangaStore.Application.Interfaces.Repositories
         Task<decimal> GetCurrentPriceAsync(int mangaId);
         Task AddAsync(PriceHistory priceHistory);
         Task<IEnumerable<PriceHistory>> GetHistoryByMangaIdAsync(int mangaId);
+        Task<Dictionary<int, decimal>> GetCurrentPricesForMangasAsync(IEnumerable<int> mangaIds);
     }
 }

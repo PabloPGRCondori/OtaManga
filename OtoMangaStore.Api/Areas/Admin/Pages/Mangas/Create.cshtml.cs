@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OtoMangaStore.Api.Areas.Admin.Models;
 using OtoMangaStore.Application.Interfaces.Repositories;
+using OtoMangaStore.Application.Interfaces.Services;
+using OtoMangaStore.Application.DTOs.Mangas;
 using OtoMangaStore.Domain.Models;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
@@ -17,11 +19,13 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
     public class CreateModel : PageModel
     {
         private readonly IUnitOfWork _uow;
+        private readonly IMangaService _mangaService;
         private readonly IWebHostEnvironment _env;
 
-        public CreateModel(IUnitOfWork uow, IWebHostEnvironment env)
+        public CreateModel(IUnitOfWork uow, IMangaService mangaService, IWebHostEnvironment env)
         {
             _uow = uow;
+            _mangaService = mangaService;
             _env = env;
         }
 
@@ -48,16 +52,14 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 return Page();
             }
 
-            var item = new Content
+            var dto = new CreateMangaDto
             {
                 Title = Input.Title,
                 Stock = Input.Stock,
                 Synopsis = Input.Synopsis,
                 CategoryId = Input.CategoryId,
                 AuthorId = Input.AuthorId,
-                ImageUrl = Input.ImageUrl,
-                // IsActive property: the domain model content doesn't include IsActive by default.
-                // If you have this property, set it. Otherwise add it to the content entity.
+                ImageUrl = Input.ImageUrl
             };
 
             // Upload image optional
@@ -71,11 +73,10 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 {
                     await UploadImage.CopyToAsync(fs);
                 }
-                item.ImageUrl = $"/images/{fileName}";
+                dto.ImageUrl = $"/images/{fileName}";
             }
 
-            await _uow.Mangas.AddAsync(item);
-            await _uow.SaveChangesAsync();
+            await _mangaService.CreateMangaAsync(dto);
 
             TempData["Success"] = "Contenido creado correctamente";
             return RedirectToPage("Index");

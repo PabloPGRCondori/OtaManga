@@ -1,16 +1,7 @@
-@page "{id:int}"
-@model OtoMangaStore.Api.Areas.Admin.Pages.Mangas.DeleteModel
-
-<h2>Eliminar Manga</h2>
-
-<div class="alert alert-danger">
-    ¿Estás seguro que deseas eliminar este manga?
-</div>
-
 <div class="card p-3 mb-3">
     <p><strong>Título:</strong> @Model.Manga?.Title</p>
-    <p><strong>Categoría:</strong> @Model.Manga?.Category?.Name</p>
-    <p><strong>Autor:</strong> @Model.Manga?.Author?.Name</p>
+    <p><strong>Categoría:</strong> @Model.Manga?.CategoryName</p>
+    <p><strong>Autor:</strong> @Model.Manga?.AuthorName</p>
     <p><strong>Stock:</strong> @Model.Manga?.Stock</p>
 </div>
 

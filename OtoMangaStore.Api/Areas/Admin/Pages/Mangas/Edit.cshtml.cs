@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OtoMangaStore.Api.Areas.Admin.Models;
 using OtoMangaStore.Application.Interfaces.Repositories;
+using OtoMangaStore.Application.Interfaces.Services;
+using OtoMangaStore.Application.DTOs.Mangas;
 using OtoMangaStore.Domain.Models;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
@@ -16,11 +18,13 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
     public class EditModel : PageModel
     {
         private readonly IUnitOfWork _uow;
+        private readonly IMangaService _mangaService;
         private readonly IWebHostEnvironment _env;
 
-        public EditModel(IUnitOfWork uow, IWebHostEnvironment env)
+        public EditModel(IUnitOfWork uow, IMangaService mangaService, IWebHostEnvironment env)
         {
             _uow = uow;
+            _mangaService = mangaService;
             _env = env;
         }
 
@@ -35,7 +39,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var item = await _uow.Mangas.GetByIdAsync(id);
+            var item = await _mangaService.GetMangaByIdAsync(id);
             if (item == null) return NotFound();
 
             Input = new ContentEditModel
@@ -46,8 +50,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 Synopsis = item.Synopsis,
                 ImageUrl = item.ImageUrl,
                 CategoryId = item.CategoryId,
-                AuthorId = item.AuthorId,
-                IsActive = false
+                AuthorId = item.AuthorId
             };
 
             AuthorsSelect = (await _uow.Authors.GetAllAsync()).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
@@ -65,15 +68,16 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 return Page();
             }
 
-            var item = await _uow.Mangas.GetByIdAsync(Input.Id);
-            if (item == null) return NotFound();
-
-            item.Title = Input.Title;
-            item.Stock = Input.Stock;
-            item.Synopsis = Input.Synopsis;
-            item.CategoryId = Input.CategoryId;
-            item.AuthorId = Input.AuthorId;
-            item.ImageUrl = Input.ImageUrl;
+            var dto = new UpdateMangaDto
+            {
+                Id = Input.Id,
+                Title = Input.Title,
+                Stock = Input.Stock,
+                Synopsis = Input.Synopsis,
+                CategoryId = Input.CategoryId,
+                AuthorId = Input.AuthorId,
+                ImageUrl = Input.ImageUrl
+            };
 
             if (UploadImage != null && UploadImage.Length > 0)
             {
@@ -85,11 +89,17 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 {
                     await UploadImage.CopyToAsync(fs);
                 }
-                item.ImageUrl = $"/images/{fileName}";
+                dto.ImageUrl = $"/images/{fileName}";
             }
 
-            await _uow.Mangas.UpdateAsync(item);
-            await _uow.SaveChangesAsync();
+            try 
+            {
+                await _mangaService.UpdateMangaAsync(dto);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
 
             TempData["Success"] = "Contenido actualizado";
             return RedirectToPage("Index");

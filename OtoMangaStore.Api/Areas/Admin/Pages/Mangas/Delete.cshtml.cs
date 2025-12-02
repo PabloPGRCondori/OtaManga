@@ -1,27 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Models;
+using OtoMangaStore.Application.Interfaces.Services;
+using OtoMangaStore.Application.DTOs;
 using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 {
     public class DeleteModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMangaService _mangaService;
 
-        public DeleteModel(IUnitOfWork uow)
+        public DeleteModel(IMangaService mangaService)
         {
-            _uow = uow;
+            _mangaService = mangaService;
         }
 
-        // Usamos "content" porque ese es TU modelo real
         [BindProperty]
-        public Content Manga { get; set; } = new Content();
+        public MangaDto Manga { get; set; } = new MangaDto();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var item = await _uow.Mangas.GetMangaDetailsAsync(id);
+            var item = await _mangaService.GetMangaByIdAsync(id);
             if (item == null)
                 return NotFound();
 
@@ -31,12 +30,14 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            var item = await _uow.Mangas.GetByIdAsync(id);
-            if (item == null)
+            try
+            {
+                await _mangaService.DeleteMangaAsync(id);
+            }
+            catch (KeyNotFoundException)
+            {
                 return NotFound();
-
-            await _uow.Mangas.DeleteAsync(item);
-            await _uow.SaveChangesAsync();
+            }
 
             TempData["Success"] = "Manga eliminado correctamente";
 
