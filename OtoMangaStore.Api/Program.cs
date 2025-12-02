@@ -204,11 +204,8 @@ app.UseCors(app.Environment.IsDevelopment() ? "AllowAll" : "AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers(); 
 app.MapRazorPages(); // ✅ Habilitar rutas de Razor Pages
