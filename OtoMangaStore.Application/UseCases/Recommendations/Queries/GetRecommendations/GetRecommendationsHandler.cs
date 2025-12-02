@@ -29,9 +29,9 @@ namespace OtoMangaStore.Application.UseCases.Recommendations.Queries.GetRecommen
                 Synopsis = m.Synopsis,
                 ImageUrl = m.ImageUrl,
                 CategoryId = m.CategoryId,
-                CategoryName = m.Category?.Name,
+                CategoryName = m.Category?.Name ?? string.Empty,
                 AuthorId = m.AuthorId,
-                AuthorName = m.Author?.Name,
+                AuthorName = m.Author?.Name ?? string.Empty,
                 CurrentPrice = prices[idx]
             }).ToList();
         }

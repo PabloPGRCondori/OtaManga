@@ -23,7 +23,7 @@ namespace OtoMangaStore.Api.Controllers
         public class ClickInput
         {
             public int MangaId { get; set; }
-            public string UserId { get; set; }
+            public string UserId { get; set; } = string.Empty;
         }
 
         [HttpPost("click")]

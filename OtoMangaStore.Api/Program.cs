@@ -18,15 +18,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-if (string.IsNullOrEmpty(connectionString))
+if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<OtoDbContext>(options =>
         options.UseInMemoryDatabase("OtoMangaDev"));
 }
-else
+else if (!string.IsNullOrEmpty(connectionString))
 {
     builder.Services.AddDbContext<OtoDbContext>(options =>
         options.UseNpgsql(connectionString));
+}
+else
+{
+    builder.Services.AddDbContext<OtoDbContext>(options =>
+        options.UseInMemoryDatabase("OtoMangaDev"));
 }
 
 // ✅ AddIdentity con SignInManager
@@ -171,6 +176,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddDataProtection();
+builder.Services.AddMemoryCache();
 
 // MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga.CreateMangaCommand).Assembly));
@@ -184,6 +190,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Services (Legacy removed)
 
 builder.Services.AddControllers();
+builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
