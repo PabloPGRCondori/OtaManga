@@ -22,10 +22,12 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var categoryDto = await _mediator.Send(new GetCategoryByIdQuery(id));
-            if (categoryDto == null) return RedirectToPage("Index");
+            var c = await _uow.Categories.GetByIdAsync(id);
 
-            Category = new Category { Id = categoryDto.Id, Name = categoryDto.Name };
+            if (c == null)
+                return RedirectToPage("Index");
+
+            Category = c;
             return Page();
         }
 
