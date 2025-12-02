@@ -12,6 +12,7 @@ using OtoMangaStore.Api.Seed;
 using OtoMangaStore.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MediatR;
+using OtoMangaStore.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -179,7 +180,8 @@ builder.Services.AddDataProtection();
 builder.Services.AddMemoryCache();
 
 // MediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga.CreateMangaCommand).Assembly));
+// Application Layer
+builder.Services.AddApplication();
 
 // Repositories
 builder.Services.AddScoped<IMangaRepository, MangaRepository>();
@@ -196,6 +198,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseMiddleware<OtoMangaStore.Api.Middleware.ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors(app.Environment.IsDevelopment() ? "AllowAll" : "AllowFrontend");
 app.UseAuthentication();

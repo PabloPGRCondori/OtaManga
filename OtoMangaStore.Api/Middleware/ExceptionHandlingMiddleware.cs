@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
 
 namespace OtoMangaStore.Api.Middleware
 {
@@ -38,6 +39,7 @@ namespace OtoMangaStore.Api.Middleware
                 UnauthorizedAccessException => (int)HttpStatusCode.Unauthorized,
                 InvalidOperationException => (int)HttpStatusCode.BadRequest,
                 ArgumentException => (int)HttpStatusCode.BadRequest,
+                ValidationException => (int)HttpStatusCode.BadRequest,
                 _ => (int)HttpStatusCode.InternalServerError
             };
 
@@ -50,6 +52,12 @@ namespace OtoMangaStore.Api.Middleware
                 Detail = exception.Message,
                 Instance = context.Request.Path
             };
+
+            if (exception is ValidationException validationException)
+            {
+                problemDetails.Extensions["errors"] = validationException.Errors
+                    .Select(e => new { e.PropertyName, e.ErrorMessage });
+            }
 
             var json = JsonSerializer.Serialize(problemDetails);
             return context.Response.WriteAsync(json);
