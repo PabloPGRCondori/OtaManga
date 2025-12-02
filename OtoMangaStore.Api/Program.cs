@@ -187,6 +187,7 @@ builder.Services.AddScoped<IClickMetricsRepository, ClickMetricsRepository>();
 builder.Services.AddScoped<IClickMetricsService, OtoMangaStore.Application.Services.ClickMetricsService>();
 builder.Services.AddScoped<IRecommendationService, OtoMangaStore.Application.Services.RecommendationService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IMangaService, MangaService>();
 
 var app = builder.Build();
 

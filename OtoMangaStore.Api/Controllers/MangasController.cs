@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OtoMangaStore.Application.DTOs;
 using OtoMangaStore.Application.Interfaces.Repositories;
+using OtoMangaStore.Application.Interfaces.Services;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -11,11 +12,11 @@ namespace OtoMangaStore.Api.Controllers
     [Route("api/[controller]")]
     public class MangasController : ControllerBase
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMangaService _mangaService;
 
-        public MangasController(IUnitOfWork uow)
+        public MangasController(IMangaService mangaService)
         {
-            _uow = uow;
+            _mangaService = mangaService;
         }
 
         [HttpGet]
@@ -26,51 +27,18 @@ namespace OtoMangaStore.Api.Controllers
                 return BadRequest("categoryId es requerido y debe ser mayor a 0");
             }
 
-            var items = await _uow.Mangas.GetMangaByCategoryAsync(categoryId);
-            var list = items.ToList();
-
-            var prices = await Task.WhenAll(list.Select(m => _uow.PriceHistory.GetCurrentPriceAsync(m.Id)));
-
-            var result = list.Select((m, idx) => new MangaDto
-            {
-                Id = m.Id,
-                Title = m.Title,
-                Stock = m.Stock,
-                Synopsis = m.Synopsis,
-                ImageUrl = m.ImageUrl,
-                CategoryId = m.CategoryId,
-                CategoryName = m.Category?.Name ?? string.Empty,
-                AuthorId = m.AuthorId,
-                AuthorName = m.Author?.Name ?? string.Empty,
-                CurrentPrice = prices[idx]
-            });
-
+            var result = await _mangaService.GetMangasByCategoryAsync(categoryId);
             return Ok(result);
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<MangaDto>> GetById(int id)
         {
-            var m = await _uow.Mangas.GetMangaDetailsAsync(id);
-            if (m == null)
+            var dto = await _mangaService.GetMangaByIdAsync(id);
+            if (dto == null)
             {
                 return NotFound();
             }
-
-            var price = await _uow.PriceHistory.GetCurrentPriceAsync(m.Id);
-            var dto = new MangaDto
-            {
-                Id = m.Id,
-                Title = m.Title,
-                Stock = m.Stock,
-                Synopsis = m.Synopsis,
-                ImageUrl = m.ImageUrl,
-                CategoryId = m.CategoryId,
-                CategoryName = m.Category?.Name ?? string.Empty,
-                AuthorId = m.AuthorId,
-                AuthorName = m.Author?.Name ?? string.Empty,
-                CurrentPrice = price
-            };
             return Ok(dto);
         }
     }

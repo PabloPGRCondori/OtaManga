@@ -12,10 +12,9 @@ namespace OtoMangaStore.Domain.Models
         [StringLength(100, ErrorMessage = "El nombre no debe superar los 100 caracteres.")]
         public string Name { get; set; }
 
-        [NotMapped]
         [StringLength(500, ErrorMessage = "La descripción no debe superar los 500 caracteres.")]
         public string Description { get; set; }
 
-        public ICollection<Manga> Mangas { get; set; } = new List<Manga>();
+        public ICollection<Content> Mangas { get; set; } = new List<Content>();
     }
 }
