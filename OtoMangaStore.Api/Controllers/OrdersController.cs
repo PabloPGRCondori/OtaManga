@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OtoMangaStore.Application.DTOs;
 using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Application.Interfaces.Services;
 using OtoMangaStore.Domain.Models;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -12,19 +13,19 @@ namespace OtoMangaStore.Api.Controllers
     [Route("api/[controller]")]
     public class OrdersController : ControllerBase
     {
-        private readonly IOrderService _orderService;
+        private readonly IMediator _mediator;
         private readonly IUnitOfWork _uow;
 
-        public OrdersController(IOrderService orderService, IUnitOfWork uow)
+        public OrdersController(IMediator mediator, IUnitOfWork uow)
         {
-            _orderService = orderService;
+            _mediator = mediator;
             _uow = uow;
         }
 
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody] CreateOrderDto dto)
         {
-            var id = await _orderService.CreateOrderAsync(dto);
+            var id = await _mediator.Send(new CreateOrderCommand(dto));
             return Ok(id);
         }
 

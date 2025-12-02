@@ -10,23 +10,15 @@ using System.Text;
 using OtoMangaStore.Domain.Models;
 using OtoMangaStore.Api.Seed;
 using OtoMangaStore.Application.Interfaces;
-using OtoMangaStore.Application.Interfaces.Services;
-using OtoMangaStore.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddRazorPages(); // ✅ Habilitar Razor Pages
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// ✅ MediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OtoMangaStore.Application.DTOs.MangaDto).Assembly));
-
+// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-if (string.IsNullOrWhiteSpace(connectionString))
+if (string.IsNullOrEmpty(connectionString))
 {
     builder.Services.AddDbContext<OtoDbContext>(options =>
         options.UseInMemoryDatabase("OtoMangaDev"));
@@ -180,17 +172,20 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDataProtection();
 
-// Repositorios y Servicios
-builder.Services.AddMemoryCache();
+// MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga.CreateMangaCommand).Assembly));
+
+// Repositories
 builder.Services.AddScoped<IMangaRepository, MangaRepository>();
-builder.Services.AddScoped<IPriceHistoryRepository, PriceHistoryRepository>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOrderService, OtoMangaStore.Application.Services.OrderService>();
 builder.Services.AddScoped<IClickMetricsRepository, ClickMetricsRepository>();
-builder.Services.AddScoped<IClickMetricsService, OtoMangaStore.Application.Services.ClickMetricsService>();
-builder.Services.AddScoped<IRecommendationService, OtoMangaStore.Application.Services.RecommendationService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Services (Legacy removed)
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

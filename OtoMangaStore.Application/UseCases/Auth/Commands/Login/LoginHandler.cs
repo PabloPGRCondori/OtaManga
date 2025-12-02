@@ -1,31 +1,29 @@
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using OtoMangaStore.Application.DTOs.Auth;
-using OtoMangaStore.Application.Interfaces;
 using OtoMangaStore.Domain.Models;
 
-namespace OtoMangaStore.Application.Services
+namespace OtoMangaStore.Application.UseCases.Auth.Commands.Login
 {
-    public class AuthService : IAuthService
+    public class LoginHandler : IRequestHandler<LoginCommand, LoginResponseDto>
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AuthService(
-            SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager)
+        public LoginHandler(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
         }
 
-        public async Task<LoginResponseDto> LoginAdminAsync(LoginRequestDto request)
+        public async Task<LoginResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var response = new LoginResponseDto();
+            var dto = request.Request;
 
             try
             {
-                // Buscar usuario por email
-                var user = await _userManager.FindByEmailAsync(request.Email);
+                var user = await _userManager.FindByEmailAsync(dto.Email);
                 
                 if (user == null)
                 {
@@ -34,7 +32,6 @@ namespace OtoMangaStore.Application.Services
                     return response;
                 }
 
-                // Verificar que el usuario tenga rol Admin o Editor
                 var roles = await _userManager.GetRolesAsync(user);
                 bool hasPermission = roles.Contains("Admin") || roles.Contains("Editor");
 
@@ -45,11 +42,10 @@ namespace OtoMangaStore.Application.Services
                     return response;
                 }
 
-                // Intentar login
                 var result = await _signInManager.PasswordSignInAsync(
                     user.UserName ?? user.Email,
-                    request.Password,
-                    request.RememberMe,
+                    dto.Password,
+                    dto.RememberMe,
                     lockoutOnFailure: true);
 
                 if (result.Succeeded)
@@ -61,7 +57,7 @@ namespace OtoMangaStore.Application.Services
                     {
                         Id = user.Id,
                         Email = user.Email ?? "",
-                        FullName = user.UserName ?? user.Email ?? "Usuario", // ✅ CORREGIDO
+                        FullName = user.UserName ?? user.Email ?? "Usuario",
                         Roles = roles.ToList()
                     };
                 }
@@ -88,36 +84,6 @@ namespace OtoMangaStore.Application.Services
             }
 
             return response;
-        }
-
-        public async Task<bool> LogoutAsync()
-        {
-            try
-            {
-                await _signInManager.SignOutAsync();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> IsUserInRoleAsync(string userId, string role)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) return false;
-
-            return await _userManager.IsInRoleAsync(user, role);
-        }
-
-        public async Task<List<string>> GetUserRolesAsync(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) return new List<string>();
-
-            var roles = await _userManager.GetRolesAsync(user);
-            return roles.ToList();
         }
     }
 }

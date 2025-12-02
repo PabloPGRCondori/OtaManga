@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OtoMangaStore.Application.DTOs;
-using OtoMangaStore.Application.Interfaces.Services;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Recommendations.Queries.GetRecommendations;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -10,11 +11,11 @@ namespace OtoMangaStore.Api.Controllers
     [Route("api/[controller]")]
     public class RecommendationsController : ControllerBase
     {
-        private readonly IRecommendationService _service;
+        private readonly IMediator _mediator;
 
-        public RecommendationsController(IRecommendationService service)
+        public RecommendationsController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -25,7 +26,7 @@ namespace OtoMangaStore.Api.Controllers
                 return BadRequest("userId es requerido");
             }
             if (top <= 0) top = 10;
-            var data = await _service.GetRecommendationsAsync(userId, top);
+            var data = await _mediator.Send(new GetRecommendationsQuery(userId, top));
             return Ok(data);
         }
     }

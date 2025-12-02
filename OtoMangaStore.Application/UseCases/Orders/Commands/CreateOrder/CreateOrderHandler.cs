@@ -1,24 +1,21 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using OtoMangaStore.Application.DTOs;
+using MediatR;
 using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Application.Interfaces.Services;
 using OtoMangaStore.Domain.Models;
 
-namespace OtoMangaStore.Application.Services
+namespace OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder
 {
-    public class OrderService : IOrderService
+    public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, int>
     {
         private readonly IUnitOfWork _uow;
 
-        public OrderService(IUnitOfWork uow)
+        public CreateOrderHandler(IUnitOfWork uow)
         {
             _uow = uow;
         }
 
-        public async Task<int> CreateOrderAsync(CreateOrderDto orderDto)
+        public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+            var orderDto = request.OrderDto;
             var order = new Order
             {
                 ExternalUserId = orderDto.UserId,

@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using OtoMangaStore.Application.DTOs.Auth;
-using OtoMangaStore.Application.Interfaces;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Auth.Commands.Login;
+using OtoMangaStore.Application.UseCases.Auth.Commands.Logout;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -12,11 +14,11 @@ namespace OtoMangaStore.Api.Controllers
     [Authorize(Roles = "Admin,Editor")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _authService;
+        private readonly IMediator _mediator;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IMediator mediator)
         {
-            _authService = authService;
+            _mediator = mediator;
         }
 
         [HttpPost("admin/login")]
@@ -32,7 +34,7 @@ namespace OtoMangaStore.Api.Controllers
                 });
             }
 
-            var result = await _authService.LoginAdminAsync(request);
+            var result = await _mediator.Send(new LoginCommand(request));
             
             if (!result.Success)
             {
@@ -46,7 +48,7 @@ namespace OtoMangaStore.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
-            var result = await _authService.LogoutAsync();
+            var result = await _mediator.Send(new LogoutCommand());
             
             if (result)
             {

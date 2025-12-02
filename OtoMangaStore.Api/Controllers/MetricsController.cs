@@ -2,7 +2,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OtoMangaStore.Application.DTOs;
-using OtoMangaStore.Application.Interfaces.Services;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Metrics.Commands.RegisterClick;
+using OtoMangaStore.Application.UseCases.Metrics.Queries.GetTopClicked;
+using OtoMangaStore.Application.UseCases.Metrics.Queries.GetCategoryRanking;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -10,11 +13,11 @@ namespace OtoMangaStore.Api.Controllers
     [Route("api/[controller]")]
     public class MetricsController : ControllerBase
     {
-        private readonly IClickMetricsService _service;
+        private readonly IMediator _mediator;
 
-        public MetricsController(IClickMetricsService service)
+        public MetricsController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
         }
 
         public class ClickInput
@@ -30,7 +33,7 @@ namespace OtoMangaStore.Api.Controllers
             {
                 return BadRequest();
             }
-            await _service.RegisterClickAsync(input.MangaId, input.UserId);
+            await _mediator.Send(new RegisterClickCommand(input.MangaId, input.UserId));
             return Ok();
         }
 
@@ -38,14 +41,14 @@ namespace OtoMangaStore.Api.Controllers
         public async Task<ActionResult<IReadOnlyList<ClickTopDto>>> Top([FromQuery] int top = 10)
         {
             if (top <= 0) top = 10;
-            var data = await _service.GetTopClickedAsync(top);
+            var data = await _mediator.Send(new GetTopClickedQuery(top));
             return Ok(data);
         }
 
         [HttpGet("category-ranking")]
         public async Task<ActionResult<IReadOnlyList<CategoryRankingDto>>> CategoryRanking()
         {
-            var data = await _service.GetCategoryRankingAsync();
+            var data = await _mediator.Send(new GetCategoryRankingQuery());
             return Ok(data);
         }
     }
