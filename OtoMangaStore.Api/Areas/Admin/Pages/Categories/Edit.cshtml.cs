@@ -1,42 +1,67 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Models;
+using MediatR;
+using OtoMangaStore.Api.Areas.Admin.Models;
+using OtoMangaStore.Application.DTOs.Categories;
+using OtoMangaStore.Application.UseCases.Categories.Commands.UpdateCategory;
+using OtoMangaStore.Application.UseCases.Categories.Queries.GetCategoryById;
+using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
 {
     public class EditModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public EditModel(IUnitOfWork uow)
+        public EditModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
         [BindProperty]
-        public Category Category { get; set; } = new Category();
+        public CategoryEditModel Input { get; set; } = new CategoryEditModel();
 
-        public async Task<IActionResult> OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Category = await _uow.Categories.GetByIdAsync(id);
+            var category = await _mediator.Send(new GetCategoryByIdQuery(id));
 
-            if (Category == null)
-                return RedirectToPage("Index");
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            Input = new CategoryEditModel
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+            {
                 return Page();
+            }
 
-            await _uow.Categories.UpdateAsync(Category);
-            await _uow.SaveChangesAsync();
+            var dto = new UpdateCategoryDto
+            {
+                Id = Input.Id,
+                Name = Input.Name
+            };
 
-            return RedirectToPage("Index");
+            try
+            {
+                await _mediator.Send(new UpdateCategoryCommand(dto));
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("./Index");
         }
-
     }
 }

@@ -1,41 +1,69 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Models;
+using MediatR;
+using OtoMangaStore.Api.Areas.Admin.Models;
+using OtoMangaStore.Application.DTOs.Authors;
+using OtoMangaStore.Application.UseCases.Authors.Commands.UpdateAuthor;
+using OtoMangaStore.Application.UseCases.Authors.Queries.GetAuthorById;
 using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
 {
     public class EditModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public EditModel(IUnitOfWork uow)
+        public EditModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
         [BindProperty]
-        public Author Author { get; set; } = new Author();
+        public AuthorEditModel Input { get; set; } = new AuthorEditModel();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var author = await _uow.Authors.GetByIdAsync(id);
-            if (author == null) return NotFound();
+            var author = await _mediator.Send(new GetAuthorByIdQuery(id));
 
-            Author = author;
+            if (author == null)
+            {
+                return NotFound();
+            }
+
+            Input = new AuthorEditModel
+            {
+                Id = author.Id,
+                Name = author.Name,
+                Description = author.Description
+            };
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+            {
                 return Page();
+            }
 
-            await _uow.Authors.UpdateAsync(Author);
-            await _uow.SaveChangesAsync();
+            var dto = new UpdateAuthorDto
+            {
+                Id = Input.Id,
+                Name = Input.Name,
+                Description = Input.Description
+            };
 
-            return RedirectToPage("Index");
+            try
+            {
+                await _mediator.Send(new UpdateAuthorCommand(dto));
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }

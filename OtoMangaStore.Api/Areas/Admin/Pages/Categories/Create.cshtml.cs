@@ -1,32 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Domain.Models;
-using OtoMangaStore.Application.Interfaces.Repositories;
+using MediatR;
+using OtoMangaStore.Api.Areas.Admin.Models;
+using OtoMangaStore.Application.DTOs.Categories;
+using OtoMangaStore.Application.UseCases.Categories.Commands.CreateCategory;
+using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
 {
     public class CreateModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public CreateModel(IUnitOfWork uow)
+        public CreateModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
         [BindProperty]
-        public Category Category { get; set; } = new Category();
+        public CategoryEditModel Input { get; set; } = new CategoryEditModel();
 
-        public async Task<IActionResult> OnPost()
+        public void OnGet() { }
+
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            await _uow.Categories.AddAsync(Category);
-            await _uow.SaveChangesAsync();
+            var dto = new CreateCategoryDto
+            {
+                Name = Input.Name
+            };
+
+            await _mediator.Send(new CreateCategoryCommand(dto));
 
             return RedirectToPage("Index");
         }
-
     }
 }

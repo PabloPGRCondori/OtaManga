@@ -1,43 +1,38 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Categories.Commands.DeleteCategory;
+using OtoMangaStore.Application.UseCases.Categories.Queries.GetCategoryById;
 using OtoMangaStore.Domain.Models;
+using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public DeleteModel(IUnitOfWork uow)
+        public DeleteModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
+        [BindProperty]
         public Category Category { get; set; } = new Category();
 
-        public async Task<IActionResult> OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Category = await _uow.Categories.GetByIdAsync(id);
+            var categoryDto = await _mediator.Send(new GetCategoryByIdQuery(id));
+            if (categoryDto == null) return RedirectToPage("Index");
 
-            if (Category == null)
-                return RedirectToPage("Index");
-
+            Category = new Category { Id = categoryDto.Id, Name = categoryDto.Name };
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(int id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            var category = await _uow.Categories.GetByIdAsync(id);
-
-            if (category != null)
-            {
-                await _uow.Categories.DeleteAsync(category);
-                await _uow.SaveChangesAsync();
-            }
-
+            await _mediator.Send(new DeleteCategoryCommand(id));
             return RedirectToPage("Index");
         }
-
     }
 }

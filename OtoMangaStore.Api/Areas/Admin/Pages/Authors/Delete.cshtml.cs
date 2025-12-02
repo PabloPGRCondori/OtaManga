@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Authors.Commands.DeleteAuthor;
+using OtoMangaStore.Application.UseCases.Authors.Queries.GetAuthorById;
 using OtoMangaStore.Domain.Models;
 using System.Threading.Tasks;
 
@@ -8,11 +10,11 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
 {
     public class DeleteModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public DeleteModel(IUnitOfWork uow)
+        public DeleteModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
         [BindProperty]
@@ -20,25 +22,17 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var author = await _uow.Authors.GetByIdAsync(id);
-            if (author == null) return NotFound();
+            var authorDto = await _mediator.Send(new GetAuthorByIdQuery(id));
+            if (authorDto == null) return NotFound();
 
-            Author = author;
+            Author = new Author { Id = authorDto.Id, Name = authorDto.Name, Description = authorDto.Description };
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            var author = await _uow.Authors.GetByIdAsync(id);
-
-            if (author != null)
-            {
-                await _uow.Authors.DeleteAsync(author);
-                await _uow.SaveChangesAsync();
-            }
-
+            await _mediator.Send(new DeleteAuthorCommand(id));
             return RedirectToPage("Index");
         }
-
     }
 }

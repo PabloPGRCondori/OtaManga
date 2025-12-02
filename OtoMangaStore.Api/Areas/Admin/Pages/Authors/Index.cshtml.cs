@@ -1,23 +1,26 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Models;
+using MediatR;
+using OtoMangaStore.Application.DTOs;
+using OtoMangaStore.Application.UseCases.Authors.Queries.GetAllAuthors;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
 {
     public class IndexModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public IndexModel(IUnitOfWork uow)
+        public IndexModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
-        public IEnumerable<Author> Authors { get; set; } = Enumerable.Empty<Author>();
+        public IEnumerable<AuthorDto> Authors { get; set; } = new List<AuthorDto>();
 
         public async Task OnGetAsync()
         {
-            Authors = await _uow.Authors.GetAllAsync();
+            Authors = await _mediator.Send(new GetAllAuthorsQuery());
         }
     }
 }

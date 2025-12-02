@@ -1,22 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Models;
+using MediatR;
+using OtoMangaStore.Api.Areas.Admin.Models;
+using OtoMangaStore.Application.DTOs.Authors;
+using OtoMangaStore.Application.UseCases.Authors.Commands.CreateAuthor;
 using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
 {
     public class CreateModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public CreateModel(IUnitOfWork uow)
+        public CreateModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
         [BindProperty]
-        public Author Author { get; set; } = new Author();
+        public AuthorEditModel Input { get; set; } = new AuthorEditModel();
 
         public void OnGet() { }
 
@@ -25,8 +27,13 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
             if (!ModelState.IsValid)
                 return Page();
 
-            await _uow.Authors.AddAsync(Author);
-            await _uow.SaveChangesAsync();
+            var dto = new CreateAuthorDto
+            {
+                Name = Input.Name,
+                Description = Input.Description
+            };
+
+            await _mediator.Send(new CreateAuthorCommand(dto));
 
             return RedirectToPage("Index");
         }

@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Models;
+using MediatR;
+using OtoMangaStore.Application.DTOs;
+using OtoMangaStore.Application.UseCases.Categories.Queries.GetAllCategories;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
 {
     public class IndexModel : PageModel
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public IndexModel(IUnitOfWork uow)
+        public IndexModel(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
-        public IEnumerable<Category> Categories { get; set; } = new List<Category>();
+        public IEnumerable<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
-            Categories = await _uow.Categories.GetAllAsync();
+            Categories = await _mediator.Send(new GetAllCategoriesQuery());
         }
     }
 }

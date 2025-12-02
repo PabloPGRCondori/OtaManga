@@ -184,6 +184,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Services (Legacy removed)
 
 builder.Services.AddControllers();
+builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
