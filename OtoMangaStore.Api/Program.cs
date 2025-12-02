@@ -21,6 +21,9 @@ builder.Services.AddRazorPages(); // ✅ Habilitar Razor Pages
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// ✅ MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OtoMangaStore.Application.DTOs.MangaDto).Assembly));
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 if (string.IsNullOrWhiteSpace(connectionString))
@@ -188,7 +191,6 @@ builder.Services.AddScoped<IClickMetricsRepository, ClickMetricsRepository>();
 builder.Services.AddScoped<IClickMetricsService, OtoMangaStore.Application.Services.ClickMetricsService>();
 builder.Services.AddScoped<IRecommendationService, OtoMangaStore.Application.Services.RecommendationService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IMangaService, MangaService>();
 
 var app = builder.Build();
 

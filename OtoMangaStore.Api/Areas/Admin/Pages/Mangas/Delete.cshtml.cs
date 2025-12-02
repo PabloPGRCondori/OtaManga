@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OtoMangaStore.Application.Interfaces.Services;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangaById;
+using OtoMangaStore.Application.UseCases.Mangas.Commands.DeleteManga;
 using OtoMangaStore.Application.DTOs;
 using System.Threading.Tasks;
 
@@ -8,11 +10,11 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 {
     public class DeleteModel : PageModel
     {
-        private readonly IMangaService _mangaService;
+        private readonly IMediator _mediator;
 
-        public DeleteModel(IMangaService mangaService)
+        public DeleteModel(IMediator mediator)
         {
-            _mangaService = mangaService;
+            _mediator = mediator;
         }
 
         [BindProperty]
@@ -20,7 +22,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var item = await _mangaService.GetMangaByIdAsync(id);
+            var item = await _mediator.Send(new GetMangaByIdQuery(id));
             if (item == null)
                 return NotFound();
 
@@ -32,7 +34,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
         {
             try
             {
-                await _mangaService.DeleteMangaAsync(id);
+                await _mediator.Send(new DeleteMangaCommand(id));
             }
             catch (KeyNotFoundException)
             {

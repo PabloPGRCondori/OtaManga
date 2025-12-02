@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OtoMangaStore.Api.Areas.Admin.Models;
 using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Application.Interfaces.Services;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangaById;
+using OtoMangaStore.Application.UseCases.Mangas.Commands.UpdateManga;
 using OtoMangaStore.Application.DTOs.Mangas;
 using OtoMangaStore.Domain.Models;
 
@@ -18,13 +20,13 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
     public class EditModel : PageModel
     {
         private readonly IUnitOfWork _uow;
-        private readonly IMangaService _mangaService;
+        private readonly IMediator _mediator;
         private readonly IWebHostEnvironment _env;
 
-        public EditModel(IUnitOfWork uow, IMangaService mangaService, IWebHostEnvironment env)
+        public EditModel(IUnitOfWork uow, IMediator mediator, IWebHostEnvironment env)
         {
             _uow = uow;
-            _mangaService = mangaService;
+            _mediator = mediator;
             _env = env;
         }
 
@@ -39,7 +41,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var item = await _mangaService.GetMangaByIdAsync(id);
+            var item = await _mediator.Send(new GetMangaByIdQuery(id));
             if (item == null) return NotFound();
 
             Input = new ContentEditModel
@@ -94,7 +96,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
 
             try 
             {
-                await _mangaService.UpdateMangaAsync(dto);
+                await _mediator.Send(new UpdateMangaCommand(dto));
             }
             catch (KeyNotFoundException)
             {

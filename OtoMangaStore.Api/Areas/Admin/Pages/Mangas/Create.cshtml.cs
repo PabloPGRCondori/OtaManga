@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OtoMangaStore.Api.Areas.Admin.Models;
 using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Application.Interfaces.Services;
+using MediatR;
+using OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga;
 using OtoMangaStore.Application.DTOs.Mangas;
 using OtoMangaStore.Domain.Models;
 
@@ -19,13 +20,13 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
     public class CreateModel : PageModel
     {
         private readonly IUnitOfWork _uow;
-        private readonly IMangaService _mangaService;
+        private readonly IMediator _mediator;
         private readonly IWebHostEnvironment _env;
 
-        public CreateModel(IUnitOfWork uow, IMangaService mangaService, IWebHostEnvironment env)
+        public CreateModel(IUnitOfWork uow, IMediator mediator, IWebHostEnvironment env)
         {
             _uow = uow;
-            _mangaService = mangaService;
+            _mediator = mediator;
             _env = env;
         }
 
@@ -76,7 +77,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 dto.ImageUrl = $"/images/{fileName}";
             }
 
-            await _mangaService.CreateMangaAsync(dto);
+            await _mediator.Send(new CreateMangaCommand(dto));
 
             TempData["Success"] = "Contenido creado correctamente";
             return RedirectToPage("Index");

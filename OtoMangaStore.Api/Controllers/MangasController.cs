@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
 using OtoMangaStore.Application.DTOs;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Application.Interfaces.Services;
+using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangasByCategory;
+using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangaById;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -12,34 +12,36 @@ namespace OtoMangaStore.Api.Controllers
     [Route("api/[controller]")]
     public class MangasController : ControllerBase
     {
-        private readonly IMangaService _mangaService;
+        private readonly IMediator _mediator;
 
-        public MangasController(IMangaService mangaService)
+        public MangasController(IMediator mediator)
         {
-            _mangaService = mangaService;
+            _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<MangaDto>>> GetByCategory([FromQuery] int categoryId)
+        [HttpGet("category/{categoryId}")]
+        public async Task<ActionResult<IEnumerable<MangaDto>>> GetMangasByCategory(int categoryId)
         {
             if (categoryId <= 0)
             {
-                return BadRequest("categoryId es requerido y debe ser mayor a 0");
+                return BadRequest("El CategoryId debe ser mayor a 0.");
             }
 
-            var result = await _mangaService.GetMangasByCategoryAsync(categoryId);
-            return Ok(result);
+            var mangas = await _mediator.Send(new GetMangasByCategoryQuery(categoryId));
+            return Ok(mangas);
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<MangaDto>> GetById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MangaDto>> GetMangaById(int id)
         {
-            var dto = await _mangaService.GetMangaByIdAsync(id);
-            if (dto == null)
+            var manga = await _mediator.Send(new GetMangaByIdQuery(id));
+
+            if (manga == null)
             {
                 return NotFound();
             }
-            return Ok(dto);
+
+            return Ok(manga);
         }
     }
 }
