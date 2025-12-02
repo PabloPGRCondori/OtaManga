@@ -1,9 +1,12 @@
-﻿@page
+@page
 @model OtoMangaStore.Api.Areas.Admin.Pages.Authors.IndexModel
 
 <h2>Autores</h2>
 
-<a asp-page="Create" class="btn btn-success mb-3">Crear Autor</a>
+<div class="mb-3">
+    <a href="/Admin/Dashboard" class="btn btn-outline-primary">Regresar al Dashboard</a>
+    <a asp-page="Create" class="btn btn-success ms-2">Crear Autor</a>
+    </div>
 
 <table class="table table-striped table-bordered align-middle shadow-sm">
     <thead class="table-dark">

@@ -1,8 +1,11 @@
-﻿@page
+@page
 @model OtoMangaStore.Api.Areas.Admin.Pages.Categories.IndexModel
 
 <h2>Categorías</h2>
-<a class="btn btn-primary" asp-page="Create">Nueva Categoría</a>
+<div class="mb-3">
+    <a href="/Admin/Dashboard" class="btn btn-outline-primary">Regresar al Dashboard</a>
+    <a class="btn btn-primary ms-2" asp-page="Create">Nueva Categoría</a>
+</div>
 
 <table class="table mt-3">
     <thead>

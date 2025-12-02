@@ -1,7 +1,12 @@
-﻿@page
+@page
 @model OtoMangaStore.Api.Areas.Admin.Pages.Categories.DeleteModel
 
 <h2>Eliminar Categoría</h2>
+
+<div class="mb-3">
+    <a href="/Admin/Dashboard" class="btn btn-outline-primary">Regresar al Dashboard</a>
+    <a asp-page="Index" class="btn btn-secondary ms-2">Volver al listado</a>
+</div>
 
 <p>¿Seguro que deseas eliminar la categoría <strong>@Model.Input.Name</strong>?</p>
 

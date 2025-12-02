@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model OtoMangaStore.Api.Areas.Admin.Pages.Mangas.IndexModel
 @{
     ViewData["Title"] = "Mangas";
@@ -6,9 +6,11 @@
 
 <h1>Mangas</h1>
 
-<p>
-    <a asp-page="Create" class="btn btn-primary">Crear Manga</a>
-</p>
+<div class="mb-3">
+    <a href="/Admin/Dashboard" class="btn btn-outline-primary">Regresar al Dashboard</a>
+    <a asp-page="Create" class="btn btn-primary ms-2">Crear Manga</a>
+</div>
+
 
 <table class="table">
     <thead>
