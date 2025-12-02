@@ -12,7 +12,7 @@ using OtoMangaStore.Api.Areas.Admin.Models;
 using OtoMangaStore.Application.Interfaces.Repositories;
 using MediatR;
 using OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga;
-using OtoMangaStore.Application.DTOs.Mangas;
+
 using OtoMangaStore.Domain.Models;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
@@ -53,14 +53,15 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 return Page();
             }
 
-            var dto = new CreateMangaDto
+            var command = new CreateMangaCommand
             {
                 Title = Input.Title,
                 Stock = Input.Stock,
-                Synopsis = Input.Synopsis,
+                Description = Input.Synopsis,
                 CategoryId = Input.CategoryId,
                 AuthorId = Input.AuthorId,
-                ImageUrl = Input.ImageUrl
+                CoverImageUrl = Input.ImageUrl,
+                Price = 0 // Default price, can be updated later
             };
 
             // Upload image optional
@@ -74,10 +75,10 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 {
                     await UploadImage.CopyToAsync(fs);
                 }
-                dto.ImageUrl = $"/images/{fileName}";
+                command.CoverImageUrl = $"/images/{fileName}";
             }
 
-            await _mediator.Send(new CreateMangaCommand(dto));
+            await _mediator.Send(command);
 
             TempData["Success"] = "Contenido creado correctamente";
             return RedirectToPage("Index");

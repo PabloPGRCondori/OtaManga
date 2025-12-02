@@ -17,26 +17,25 @@ namespace OtoMangaStore.Application.UseCases.Mangas.Commands.UpdateManga
 
         public async Task Handle(UpdateMangaCommand request, CancellationToken cancellationToken)
         {
-            var dto = request.MangaDto;
-            var manga = await _uow.Mangas.GetByIdAsync(dto.Id);
+            var manga = await _uow.Mangas.GetByIdAsync(request.Id);
             
             if (manga == null)
             {
-                throw new KeyNotFoundException($"Manga with ID {dto.Id} not found.");
+                throw new KeyNotFoundException($"Manga with ID {request.Id} not found.");
             }
 
-            manga.Title = dto.Title;
-            manga.Stock = dto.Stock;
-            manga.Synopsis = dto.Synopsis;
-            manga.ImageUrl = dto.ImageUrl;
-            manga.CategoryId = dto.CategoryId;
-            manga.AuthorId = dto.AuthorId;
+            manga.Title = request.Title;
+            manga.Stock = request.Stock;
+            manga.Synopsis = request.Description;
+            manga.ImageUrl = request.CoverImageUrl;
+            manga.CategoryId = request.CategoryId;
+            manga.AuthorId = request.AuthorId;
 
             await _uow.Mangas.UpdateAsync(manga);
             await _uow.SaveChangesAsync();
             
             // Invalidate cache
-            _cache.Remove($"manga_{dto.Id}");
+            _cache.Remove($"manga_{request.Id}");
         }
     }
 }

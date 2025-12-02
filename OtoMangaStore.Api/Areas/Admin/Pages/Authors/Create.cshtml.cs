@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MediatR;
 using OtoMangaStore.Api.Areas.Admin.Models;
-using OtoMangaStore.Application.DTOs.Authors;
+
 using OtoMangaStore.Application.UseCases.Authors.Commands.CreateAuthor;
 using System.Threading.Tasks;
 
@@ -27,13 +27,13 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
             if (!ModelState.IsValid)
                 return Page();
 
-            var dto = new CreateAuthorDto
+            var command = new CreateAuthorCommand
             {
                 Name = Input.Name,
                 Description = Input.Description
             };
 
-            await _mediator.Send(new CreateAuthorCommand(dto));
+            await _mediator.Send(command);
 
             return RedirectToPage("Index");
         }

@@ -17,8 +17,8 @@ namespace OtoMangaStore.Application.UseCases.Authors.Commands.CreateAuthor
         {
             var author = new Author
             {
-                Name = request.AuthorDto.Name,
-                Description = request.AuthorDto.Description
+                Name = request.Name,
+                Description = request.Description
             };
 
             await _uow.Authors.AddAsync(author);

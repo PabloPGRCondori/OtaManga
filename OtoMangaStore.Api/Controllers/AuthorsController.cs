@@ -10,71 +10,63 @@ namespace OtoMangaStore.Api.Controllers
     [Route("api/[controller]")]
     public class AuthorsController : ControllerBase
     {
-        private readonly IUnitOfWork _uow;
+        private readonly MediatR.IMediator _mediator;
 
-        public AuthorsController(IUnitOfWork uow)
+        public AuthorsController(MediatR.IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AuthorDto>>> GetAll()
         {
-            var authors = await _uow.Authors.GetAllAsync();
-
-            var dto = authors.Select(a => new AuthorDto
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Description = a.Description
-            });
-
-            return Ok(dto);
+            var authors = await _mediator.Send(new OtoMangaStore.Application.UseCases.Authors.Queries.GetAllAuthors.GetAllAuthorsQuery());
+            return Ok(authors);
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<AuthorDto>> GetById(int id)
         {
-            var a = await _uow.Authors.GetByIdAsync(id);
-            if (a == null) return NotFound();
+            var author = await _mediator.Send(new OtoMangaStore.Application.UseCases.Authors.Queries.GetAuthorById.GetAuthorByIdQuery(id));
+            if (author == null) return NotFound();
 
-            return Ok(new AuthorDto
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Description = a.Description
-            });
+            return Ok(author);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AuthorDto dto)
+        public async Task<IActionResult> Create([FromBody] OtoMangaStore.Api.DTOs.Requests.CreateAuthorRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var author = new Author
+            var command = new OtoMangaStore.Application.UseCases.Authors.Commands.CreateAuthor.CreateAuthorCommand
             {
-                Name = dto.Name,
-                Description = dto.Description
+                Name = request.Name,
+                Description = request.Description
             };
 
-            await _uow.Authors.AddAsync(author);
-            await _uow.SaveChangesAsync();
+            var id = await _mediator.Send(command); // Assuming Mediator is injected, but AuthorsController uses _uow directly!
 
-            return Ok(author.Id);
+            // Wait, AuthorsController uses _uow directly. I need to refactor it to use Mediator!
+            // The previous refactoring was for Admin Razor Pages, not the API Controller.
+            // But to use the new Commands (which I refactored), I MUST use Mediator here.
+            
+            return Ok(id);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromBody] AuthorDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] OtoMangaStore.Api.DTOs.Requests.UpdateAuthorRequest request)
         {
-            var author = await _uow.Authors.GetByIdAsync(id);
-            if (author == null) return NotFound();
+            if (id != request.Id) return BadRequest("ID mismatch");
+            
+            var command = new OtoMangaStore.Application.UseCases.Authors.Commands.UpdateAuthor.UpdateAuthorCommand
+            {
+                Id = request.Id,
+                Name = request.Name,
+                Description = request.Description
+            };
 
-            author.Name = dto.Name;
-            author.Description = dto.Description;
-
-            await _uow.Authors.UpdateAsync(author);
-            await _uow.SaveChangesAsync();
+            await _mediator.Send(command);
 
             return Ok();
         }
@@ -82,12 +74,7 @@ namespace OtoMangaStore.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var author = await _uow.Authors.GetByIdAsync(id);
-            if (author == null) return NotFound();
-
-            await _uow.Authors.DeleteAsync(author);
-            await _uow.SaveChangesAsync();
-
+            await _mediator.Send(new OtoMangaStore.Application.UseCases.Authors.Commands.DeleteAuthor.DeleteAuthorCommand(id));
             return Ok();
         }
     }

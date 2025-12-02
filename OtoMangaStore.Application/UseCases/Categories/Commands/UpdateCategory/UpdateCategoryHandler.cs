@@ -14,15 +14,14 @@ namespace OtoMangaStore.Application.UseCases.Categories.Commands.UpdateCategory
 
         public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var dto = request.CategoryDto;
-            var category = await _uow.Categories.GetByIdAsync(dto.Id);
+            var category = await _uow.Categories.GetByIdAsync(request.Id);
 
             if (category == null)
             {
-                throw new KeyNotFoundException($"Category with ID {dto.Id} not found.");
+                throw new KeyNotFoundException($"Category with ID {request.Id} not found.");
             }
 
-            category.Name = dto.Name;
+            category.Name = request.Name;
 
             await _uow.Categories.UpdateAsync(category);
             await _uow.SaveChangesAsync();

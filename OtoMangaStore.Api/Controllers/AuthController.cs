@@ -6,6 +6,8 @@ using OtoMangaStore.Application.DTOs.Auth;
 using MediatR;
 using OtoMangaStore.Application.UseCases.Auth.Commands.Login;
 using OtoMangaStore.Application.UseCases.Auth.Commands.Logout;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -23,7 +25,7 @@ namespace OtoMangaStore.Api.Controllers
 
         [HttpPost("admin/login")]
         [AllowAnonymous]
-        public async Task<IActionResult> AdminLogin([FromBody] LoginRequestDto request)
+        public async Task<IActionResult> AdminLogin([FromBody] OtoMangaStore.Api.DTOs.Requests.LoginRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -34,7 +36,14 @@ namespace OtoMangaStore.Api.Controllers
                 });
             }
 
-            var result = await _mediator.Send(new LoginCommand(request));
+            var command = new LoginCommand
+            {
+                Email = request.Email,
+                Password = request.Password,
+                RememberMe = request.RememberMe
+            };
+
+            var result = await _mediator.Send(command);
             
             if (!result.Success)
             {

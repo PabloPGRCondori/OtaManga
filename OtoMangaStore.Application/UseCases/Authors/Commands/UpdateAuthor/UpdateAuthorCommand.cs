@@ -1,15 +1,12 @@
 using MediatR;
-using OtoMangaStore.Application.DTOs.Authors;
+
 
 namespace OtoMangaStore.Application.UseCases.Authors.Commands.UpdateAuthor
 {
     public class UpdateAuthorCommand : IRequest
     {
-        public UpdateAuthorDto AuthorDto { get; }
-
-        public UpdateAuthorCommand(UpdateAuthorDto authorDto)
-        {
-            AuthorDto = authorDto;
-        }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
     }
 }

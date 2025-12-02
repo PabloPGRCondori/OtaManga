@@ -8,51 +8,60 @@ namespace OtoMangaStore.Api.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly IUnitOfWork _uow;
+        private readonly MediatR.IMediator _mediator;
 
-        public CategoryController(IUnitOfWork uow)
+        public CategoryController(MediatR.IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var categories = await _uow.Categories.GetAllAsync();
+            var categories = await _mediator.Send(new OtoMangaStore.Application.UseCases.Categories.Queries.GetAllCategories.GetAllCategoriesQuery());
             return Ok(categories);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var category = await _uow.Categories.GetByIdAsync(id);
+            var category = await _mediator.Send(new OtoMangaStore.Application.UseCases.Categories.Queries.GetCategoryById.GetCategoryByIdQuery(id));
             if (category == null) return NotFound();
             return Ok(category);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Category category)
+        public async Task<IActionResult> Create([FromBody] OtoMangaStore.Api.DTOs.Requests.CreateCategoryRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _uow.Categories.AddAsync(category);
-            await _uow.SaveChangesAsync();
+            var command = new OtoMangaStore.Application.UseCases.Categories.Commands.CreateCategory.CreateCategoryCommand
+            {
+                Name = request.Name
+            };
 
-            return CreatedAtAction(nameof(GetById), new { id = category.Id }, category);
+            var id = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetById), new { id = id }, new { id = id, name = request.Name });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Category category)
+        public async Task<IActionResult> Update(int id, [FromBody] OtoMangaStore.Api.DTOs.Requests.UpdateCategoryRequest request)
         {
-            if (id != category.Id)
+            if (id != request.Id)
                 return BadRequest("El ID no coincide.");
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _uow.Categories.UpdateAsync(category);
-            await _uow.SaveChangesAsync();
+            var command = new OtoMangaStore.Application.UseCases.Categories.Commands.UpdateCategory.UpdateCategoryCommand
+            {
+                Id = request.Id,
+                Name = request.Name
+            };
+
+            await _mediator.Send(command);
 
             return NoContent();
         }
@@ -60,12 +69,7 @@ namespace OtoMangaStore.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var category = await _uow.Categories.GetByIdAsync(id);
-            if (category == null) return NotFound();
-
-            await _uow.Categories.DeleteAsync(category);
-            await _uow.SaveChangesAsync();
-
+            await _mediator.Send(new OtoMangaStore.Application.UseCases.Categories.Commands.DeleteCategory.DeleteCategoryCommand(id));
             return NoContent();
         }
     }

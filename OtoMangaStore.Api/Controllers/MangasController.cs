@@ -6,6 +6,8 @@ using OtoMangaStore.Application.DTOs;
 using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangasByCategory;
 using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangaById;
 using OtoMangaStore.Application.UseCases.Mangas.Queries.GetAllMangas;
+using OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga;
+using OtoMangaStore.Application.UseCases.Mangas.Commands.UpdateManga;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -50,6 +52,54 @@ namespace OtoMangaStore.Api.Controllers
             }
 
             return Ok(manga);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] OtoMangaStore.Api.DTOs.Requests.CreateMangaRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var command = new CreateMangaCommand
+            {
+                Title = request.Title,
+                Description = request.Description,
+                AuthorId = request.AuthorId,
+                CategoryId = request.CategoryId,
+                Price = request.Price,
+                CoverImageUrl = request.CoverImageUrl,
+                Stock = request.Stock
+            };
+
+            var mangaDto = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetMangaById), new { id = mangaDto.Id }, mangaDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] OtoMangaStore.Api.DTOs.Requests.UpdateMangaRequest request)
+        {
+            if (id != request.Id)
+                return BadRequest("El ID no coincide.");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var command = new UpdateMangaCommand
+            {
+                Id = request.Id,
+                Title = request.Title,
+                Description = request.Description,
+                AuthorId = request.AuthorId,
+                CategoryId = request.CategoryId,
+                Price = request.Price,
+                CoverImageUrl = request.CoverImageUrl,
+                Stock = request.Stock
+            };
+
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

@@ -14,16 +14,15 @@ namespace OtoMangaStore.Application.UseCases.Authors.Commands.UpdateAuthor
 
         public async Task Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
-            var dto = request.AuthorDto;
-            var author = await _uow.Authors.GetByIdAsync(dto.Id);
+            var author = await _uow.Authors.GetByIdAsync(request.Id);
 
             if (author == null)
             {
-                throw new KeyNotFoundException($"Author with ID {dto.Id} not found.");
+                throw new KeyNotFoundException($"Author with ID {request.Id} not found.");
             }
 
-            author.Name = dto.Name;
-            author.Description = dto.Description;
+            author.Name = request.Name;
+            author.Description = request.Description;
 
             await _uow.Authors.UpdateAsync(author);
             await _uow.SaveChangesAsync();

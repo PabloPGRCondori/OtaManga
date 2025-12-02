@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OtoMangaStore.Application.DTOs;
-using OtoMangaStore.Application.Interfaces.Repositories;
-using OtoMangaStore.Domain.Models;
 using MediatR;
 using OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder;
+using OtoMangaStore.Application.UseCases.Orders.Queries.GetOrdersByUser;
+using OtoMangaStore.Domain.Models;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -14,18 +14,26 @@ namespace OtoMangaStore.Api.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IUnitOfWork _uow;
 
-        public OrdersController(IMediator mediator, IUnitOfWork uow)
+        public OrdersController(IMediator mediator)
         {
             _mediator = mediator;
-            _uow = uow;
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateOrderDto dto)
+        public async Task<ActionResult<int>> Create([FromBody] OtoMangaStore.Api.DTOs.Requests.CreateOrderRequest request)
         {
-            var id = await _mediator.Send(new CreateOrderCommand(dto));
+            var command = new CreateOrderCommand
+            {
+                ExternalUserId = request.UserId,
+                Items = request.Items.Select(i => new OrderItemCommand
+                {
+                    MangaId = i.MangaId,
+                    Quantity = i.Quantity
+                }).ToList()
+            };
+
+            var id = await _mediator.Send(command);
             return Ok(id);
         }
 
@@ -36,7 +44,8 @@ namespace OtoMangaStore.Api.Controllers
             {
                 return BadRequest("userId es requerido");
             }
-            var orders = await _uow.Orders.GetByUserIdAsync(userId);
+            
+            var orders = await _mediator.Send(new GetOrdersByUserQuery(userId));
             return Ok(orders);
         }
     }

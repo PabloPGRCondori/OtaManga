@@ -19,11 +19,10 @@ namespace OtoMangaStore.Application.UseCases.Auth.Commands.Login
         public async Task<LoginResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var response = new LoginResponseDto();
-            var dto = request.Request;
 
             try
             {
-                var user = await _userManager.FindByEmailAsync(dto.Email);
+                var user = await _userManager.FindByEmailAsync(request.Email);
                 
                 if (user == null)
                 {
@@ -44,8 +43,8 @@ namespace OtoMangaStore.Application.UseCases.Auth.Commands.Login
 
                 var result = await _signInManager.PasswordSignInAsync(
                     user.UserName ?? user.Email,
-                    dto.Password,
-                    dto.RememberMe,
+                    request.Password,
+                    request.RememberMe,
                     lockoutOnFailure: true);
 
                 if (result.Succeeded)

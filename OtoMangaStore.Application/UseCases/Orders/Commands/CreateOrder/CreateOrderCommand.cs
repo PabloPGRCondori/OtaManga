@@ -1,15 +1,17 @@
 using MediatR;
-using OtoMangaStore.Application.DTOs;
+
 
 namespace OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder
 {
     public class CreateOrderCommand : IRequest<int>
     {
-        public CreateOrderDto OrderDto { get; }
+        public string ExternalUserId { get; set; } = string.Empty;
+        public List<OrderItemCommand> Items { get; set; } = new();
+    }
 
-        public CreateOrderCommand(CreateOrderDto orderDto)
-        {
-            OrderDto = orderDto;
-        }
+    public class OrderItemCommand
+    {
+        public int MangaId { get; set; }
+        public int Quantity { get; set; }
     }
 }

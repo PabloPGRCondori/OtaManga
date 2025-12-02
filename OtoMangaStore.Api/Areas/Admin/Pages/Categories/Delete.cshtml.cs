@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MediatR;
+using OtoMangaStore.Api.Areas.Admin.Models;
 using OtoMangaStore.Application.UseCases.Categories.Commands.DeleteCategory;
 using OtoMangaStore.Application.UseCases.Categories.Queries.GetCategoryById;
-using OtoMangaStore.Domain.Models;
 using System.Threading.Tasks;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
@@ -18,16 +18,21 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Categories
         }
 
         [BindProperty]
-        public Category Category { get; set; } = new Category();
+        public CategoryEditModel Input { get; set; } = new CategoryEditModel();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var c = await _uow.Categories.GetByIdAsync(id);
+            var category = await _mediator.Send(new GetCategoryByIdQuery(id));
 
-            if (c == null)
+            if (category == null)
                 return RedirectToPage("Index");
 
-            Category = c;
+            Input = new CategoryEditModel
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+
             return Page();
         }
 

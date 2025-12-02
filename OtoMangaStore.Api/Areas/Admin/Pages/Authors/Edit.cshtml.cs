@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MediatR;
 using OtoMangaStore.Api.Areas.Admin.Models;
-using OtoMangaStore.Application.DTOs.Authors;
+
 using OtoMangaStore.Application.UseCases.Authors.Commands.UpdateAuthor;
 using OtoMangaStore.Application.UseCases.Authors.Queries.GetAuthorById;
 using System.Threading.Tasks;
@@ -47,7 +47,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
                 return Page();
             }
 
-            var dto = new UpdateAuthorDto
+            var command = new UpdateAuthorCommand
             {
                 Id = Input.Id,
                 Name = Input.Name,
@@ -56,7 +56,7 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Authors
 
             try
             {
-                await _mediator.Send(new UpdateAuthorCommand(dto));
+                await _mediator.Send(command);
             }
             catch (KeyNotFoundException)
             {

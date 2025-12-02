@@ -17,7 +17,7 @@ namespace OtoMangaStore.Application.UseCases.Categories.Commands.CreateCategory
         {
             var category = new Category
             {
-                Name = request.CategoryDto.Name
+                Name = request.Name
             };
 
             await _uow.Categories.AddAsync(category);

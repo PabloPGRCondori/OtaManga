@@ -16,15 +16,14 @@ namespace OtoMangaStore.Application.UseCases.Mangas.Commands.CreateManga
 
         public async Task<MangaDto> Handle(CreateMangaCommand request, CancellationToken cancellationToken)
         {
-            var dto = request.MangaDto;
             var manga = new Content
             {
-                Title = dto.Title,
-                Stock = dto.Stock,
-                Synopsis = dto.Synopsis,
-                ImageUrl = dto.ImageUrl,
-                CategoryId = dto.CategoryId,
-                AuthorId = dto.AuthorId
+                Title = request.Title,
+                Stock = request.Stock,
+                Synopsis = request.Description,
+                ImageUrl = request.CoverImageUrl,
+                CategoryId = request.CategoryId,
+                AuthorId = request.AuthorId
             };
 
             await _uow.Mangas.AddAsync(manga);

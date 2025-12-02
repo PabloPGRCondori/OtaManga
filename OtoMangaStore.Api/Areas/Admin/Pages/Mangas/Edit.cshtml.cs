@@ -12,7 +12,7 @@ using OtoMangaStore.Application.Interfaces.Repositories;
 using MediatR;
 using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangaById;
 using OtoMangaStore.Application.UseCases.Mangas.Commands.UpdateManga;
-using OtoMangaStore.Application.DTOs.Mangas;
+
 using OtoMangaStore.Domain.Models;
 
 namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
@@ -70,15 +70,16 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 return Page();
             }
 
-            var dto = new UpdateMangaDto
+            var command = new UpdateMangaCommand
             {
                 Id = Input.Id,
                 Title = Input.Title,
                 Stock = Input.Stock,
-                Synopsis = Input.Synopsis,
+                Description = Input.Synopsis,
                 CategoryId = Input.CategoryId,
                 AuthorId = Input.AuthorId,
-                ImageUrl = Input.ImageUrl
+                CoverImageUrl = Input.ImageUrl,
+                Price = 0 // Default price, can be updated later
             };
 
             if (UploadImage != null && UploadImage.Length > 0)
@@ -91,12 +92,12 @@ namespace OtoMangaStore.Api.Areas.Admin.Pages.Mangas
                 {
                     await UploadImage.CopyToAsync(fs);
                 }
-                dto.ImageUrl = $"/images/{fileName}";
+                command.CoverImageUrl = $"/images/{fileName}";
             }
 
             try 
             {
-                await _mediator.Send(new UpdateMangaCommand(dto));
+                await _mediator.Send(command);
             }
             catch (KeyNotFoundException)
             {

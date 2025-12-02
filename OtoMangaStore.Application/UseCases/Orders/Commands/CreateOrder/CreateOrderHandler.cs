@@ -1,12 +1,15 @@
 using MediatR;
 using OtoMangaStore.Application.Interfaces.Repositories;
 using OtoMangaStore.Domain.Models;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder
 {
     public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, int>
     {
-        private readonly IUnitOfWork _uow;
+        private readonly OtoMangaStore.Application.Interfaces.Repositories.IUnitOfWork _uow;
 
         public CreateOrderHandler(IUnitOfWork uow)
         {
@@ -15,17 +18,16 @@ namespace OtoMangaStore.Application.UseCases.Orders.Commands.CreateOrder
 
         public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var orderDto = request.OrderDto;
             var order = new Order
             {
-                ExternalUserId = orderDto.UserId,
+                ExternalUserId = request.ExternalUserId,
                 OrderDate = DateTime.UtcNow,
                 Status = "Created",
                 TotalAmount = 0m,
                 OrderItems = []
             };
 
-            foreach (var item in orderDto.Items)
+            foreach (var item in request.Items)
             {
                 var manga = await _uow.Mangas.GetByIdAsync(item.MangaId);
                 if (manga == null)
