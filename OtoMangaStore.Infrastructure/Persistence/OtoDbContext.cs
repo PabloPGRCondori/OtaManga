@@ -22,6 +22,7 @@ namespace OtoMangaStore.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder); 
             modelBuilder.Entity<Content>().ToTable("content"); 
+            modelBuilder.Entity<Content>().Property(c => c.Price).HasColumnName("price");
             
             modelBuilder.Entity<Order>().ToTable("orders");
             modelBuilder.Entity<OrderItem>().ToTable("orderitems");
