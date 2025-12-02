@@ -5,6 +5,7 @@ using MediatR;
 using OtoMangaStore.Application.DTOs;
 using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangasByCategory;
 using OtoMangaStore.Application.UseCases.Mangas.Queries.GetMangaById;
+using OtoMangaStore.Application.UseCases.Mangas.Queries.GetAllMangas;
 
 namespace OtoMangaStore.Api.Controllers
 {
@@ -17,6 +18,13 @@ namespace OtoMangaStore.Api.Controllers
         public MangasController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MangaDto>>> GetAllMangas()
+        {
+            var mangas = await _mediator.Send(new GetAllMangasQuery());
+            return Ok(mangas);
         }
 
         [HttpGet("category/{categoryId}")]
