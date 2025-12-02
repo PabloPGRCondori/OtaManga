@@ -55,47 +55,18 @@ namespace OtoMangaStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] OtoMangaStore.Api.DTOs.Requests.CreateMangaRequest request)
+        public async Task<IActionResult> Create([FromBody] CreateMangaCommand command)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var command = new CreateMangaCommand
-            {
-                Title = request.Title,
-                Description = request.Description,
-                AuthorId = request.AuthorId,
-                CategoryId = request.CategoryId,
-                Price = request.Price,
-                CoverImageUrl = request.CoverImageUrl,
-                Stock = request.Stock
-            };
-
             var mangaDto = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetMangaById), new { id = mangaDto.Id }, mangaDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] OtoMangaStore.Api.DTOs.Requests.UpdateMangaRequest request)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateMangaCommand command)
         {
-            if (id != request.Id)
+            if (id != command.Id)
                 return BadRequest("El ID no coincide.");
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var command = new UpdateMangaCommand
-            {
-                Id = request.Id,
-                Title = request.Title,
-                Description = request.Description,
-                AuthorId = request.AuthorId,
-                CategoryId = request.CategoryId,
-                Price = request.Price,
-                CoverImageUrl = request.CoverImageUrl,
-                Stock = request.Stock
-            };
 
             await _mediator.Send(command);
 
